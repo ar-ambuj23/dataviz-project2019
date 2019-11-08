@@ -1,5 +1,9 @@
+.states{
+    fill: lightgrey;
+}
+
 .states :hover {
-    fill: lightskyblue;
+    fill: darkgrey;
 }
 
 .state-borders {
