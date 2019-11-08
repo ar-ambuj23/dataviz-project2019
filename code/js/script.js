@@ -2,11 +2,12 @@
     /**
      * Loads in the us-pollution-data.json
      */
-d3.json('data/us-pollution-data.json').then( data => {
+d3.json('https://d3js.org/us-10m.v1.json').then( usMapdata => {
 
             //Create Map Object
-            let map = new Map();
-            map.createMap(data);
+            let mapObj = new Map(usMapdata,null);
+            mapObj.createMap();
+
             
 });
     

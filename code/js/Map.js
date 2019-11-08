@@ -1,7 +1,8 @@
 class Map {
 
-    constructor() {
-
+    constructor(usData,data) {
+        this.usData = usData;
+        this.data = data;
     }
 
     /**
@@ -10,7 +11,23 @@ class Map {
      * TBD: might be redundant since
      * we have updateMap(), too.
      */
-    createMap(data) {
+    createMap() {
+        //console.log("Inside crete map");
+        var svg = d3.select("svg");
+
+        var path = d3.geoPath();
+
+        svg.append("g")
+            .attr("class", "states")
+            .selectAll("path")
+            .data(topojson.feature(this.usData, this.usData.objects.states).features)
+            .enter().append("path")
+            .attr("d", path);
+
+        svg.append("path")
+            .attr("class", "state-borders")
+            .attr("d", path(topojson.mesh(this.usData, this.usData.objects.states, function(a, b) { return a !== b; })));
+
 
     }
 
