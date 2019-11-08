@@ -1,3 +1,5 @@
+class HelperElements {
+
 /**
  * This class draws all the helper
  * elements needed by the NYSM interface.
@@ -7,12 +9,9 @@
  * 3. Pollutant Dropdown.
  * 4. Info Box.
  */
-
-class HelperElements {
-    
     constructor() {
+        console.log("Coming here?")
         this.pollutants = ["All","Corbon Monoxide", "Sulphur Dioxide","Nitrous Oxide","Ozone"]
-        this.drawDropdown(this.pollutants)
 
     }
 
@@ -39,17 +38,8 @@ class HelperElements {
      * pollutants and throws related events.
      */
     drawDropdown(pollutantList) {
-        let dropDown = document.getElementById("#pollutantDropDown");
-        console.log(dropDown);
-        console.log(pollutantList, pollutantList.length)
-        for(let i = 0; i < pollutantList.length; i++) {
-            let val = pollutantList[i];
-            console.log(val)
-            let dd = document.createElement("option");
-            dd.textContent = val;
-            dd.value = val;
-            if(dropDown) dropDown.appendChild(dd);
-        }
+        let dropDown = document.getElementById("#pollutantDropDown")
+        console.log(pollutatntList)
 
 
 
