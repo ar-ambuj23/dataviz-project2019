@@ -8,8 +8,8 @@ d3.json('https://d3js.org/us-10m.v1.json').then( usMapData => {
             let mapObj = new Map(usMapData,null);
             mapObj.createMap();
 
-            // let helperObj = new HelperElements();
-
-            
+            //Creating all the Helper Elements
+            let helperObj = new HelperElements();
+        
 });
     

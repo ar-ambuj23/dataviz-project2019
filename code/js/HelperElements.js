@@ -9,9 +9,18 @@ class HelperElements {
  * 3. Pollutant Dropdown.
  * 4. Info Box.
  */
-    constructor() {
-        console.log("Coming here?")
-        this.pollutants = ["All","Corbon Monoxide", "Sulphur Dioxide","Nitrous Oxide","Ozone"]
+    constructor(pollutionData) {
+        console.log("Inside the Helper Class Constructor")
+        // this.pollutants = ["All","Corbon Monoxide", "Sulphur Dioxide","Nitrous Oxide","Ozone"]
+        
+        //Making Pollution Data a class variable
+        this.pollutionData = pollutionData;
+
+        // Calling Helper Methods
+        this.drawTimeSlider();
+        this.drawDropdown();
+
+
 
     }
 
@@ -20,8 +29,19 @@ class HelperElements {
      * draws the time slider and
      * throws related events.
      */
-    drawTimeSlider(rangeStart, rangeEnd, timePeriod) {
+    drawTimeSlider() {
 
+        // Making a scale for slider
+        let yearScale = d3.scaleLinear().domain([2000, 2016]).range([30, 730]); 
+
+        console.log('Inside drawTimeSlider')
+        d3.select("#slider")
+        .append('div').classed('slider-wrap', true)
+        .append('input').classed('slider', true)
+        .attr('type', 'range')
+        .attr('min', 2000)
+        .attr('max', 2016)
+        .attr('value', 2004);
     }
 
 
@@ -38,11 +58,7 @@ class HelperElements {
      * pollutants and throws related events.
      */
     drawDropdown(pollutantList) {
-        let dropDown = document.getElementById("#pollutantDropDown")
-        console.log(pollutatntList)
-
-
-
+        console.log(this.pollutionData)
 
     }
 

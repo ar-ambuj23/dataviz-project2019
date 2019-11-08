@@ -15,18 +15,25 @@ class Map {
         //console.log("Inside crete map");
         var MapView = d3.select("#MapView")
 
-        var MapViewSVG = MapView.select("svg")
+        MapView.append("div").attr("id", "buttons")
+        MapView.append("div").attr("id", "slider")
+        MapView.append("div").attr("id", "map")
+
+        var MapSVG = d3.select("#map")
+                        .append("svg")
+                        .attr("width","1000")
+                        .attr("height","600")
 
         var path = d3.geoPath();
 
-        MapViewSVG.append("g")
+        MapSVG.append("g")
             .attr("class", "states")
             .selectAll("path")
             .data(topojson.feature(this.usData, this.usData.objects.states).features)
             .enter().append("path")
             .attr("d", path);
 
-        MapViewSVG.append("path")
+        MapSVG.append("path")
             .attr("class", "state-borders")
             .attr("d", path(topojson.mesh(this.usData, this.usData.objects.states, function(a, b) { return a !== b; })));
 
