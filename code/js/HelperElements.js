@@ -48,7 +48,10 @@ class HelperElements {
      * and throws related events.
      */
     drawToggle() {
-
+        let tobbleBtn = d3.select('#buttons')
+            .append('div')
+            .append('input')
+            .attr("id",)
     }
 
     /**
