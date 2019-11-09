@@ -13,7 +13,7 @@ class HelperElements {
         console.log("Inside the Helper Class Constructor")
         
         // Making a list of options for drop down
-        this.pollutantList = ["All","Carbon Monoxide", "Sulphur Dioxide","Nitrous Oxide","Ozone"]
+        this.pollutantList = ["Carbon Monoxide", "Sulphur Dioxide","Nitrous Oxide","Ozone"]
         
         //Making Pollution Data a class variable
         this.pollutionData = pollutionData;

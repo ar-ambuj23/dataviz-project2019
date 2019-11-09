@@ -1,4 +1,15 @@
 /* Map Styling */
+
+header {
+    font-size: 48px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.light-hr {
+    border: 1px solid #EEEEEE;
+    margin: 3px 10px 10px 10px;
+}
+
 .states{
     fill: lightgrey;
 }
@@ -28,7 +39,7 @@
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
-    margin-left: 20px
+    margin: auto;
 }
 
 .slider::-webkit-slider-thumb {
@@ -37,7 +48,7 @@
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #4CAF50;
+    background: #212121;
     cursor: pointer;
 }
 
@@ -66,5 +77,15 @@
     display: inline-block;
     float: left;
     width: 750px;
-    margin-left: 50px;
+}
+
+.states-active {
+    fill: orange!important;
+}
+
+#pollutantSelector {
+    font-size: 25px;
+    padding: 2px;
+    float: right;
+    margin-right: 10px;
 }
