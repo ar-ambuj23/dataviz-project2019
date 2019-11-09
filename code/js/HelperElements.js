@@ -24,6 +24,7 @@ class HelperElements {
 
         // Calling Helper Methods
         this.drawTimeSlider();
+        this.drawToggle();
         this.drawDropdown();
 
     }
@@ -62,10 +63,24 @@ class HelperElements {
      * and throws related events.
      */
     drawToggle() {
+        let svgBtn = d3.select('#buttons').append("div")
 
+        // Toggle Button
+        svgBtn.append('span').text("Month")
+
+        svgBtn.append('span').append("label")
+            .attr("id", "labelID")
+            .attr("class", "switch")
+            .append("input")
+            .attr("type", "checkbox")
+            .attr("id", "toggleSwitch")
+
+        d3.select("#labelID").append("span")
+            .attr("class", "tBtnSlider round")
+
+        svgBtn.append("span").text("Year")
     }
-
-    /**
+    /*
      * draws the dropdown for 
      * pollutants and throws related events.
      */
