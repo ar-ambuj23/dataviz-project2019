@@ -10,7 +10,6 @@ class HelperElements {
  * 4. Info Box.
  */
     constructor(pollutionData, updatePollutant, updateTime) {
-        console.log("Inside the Helper Class Constructor")
         
         // Making a list of options for drop down
         this.pollutantList = ["Carbon Monoxide", "Sulphur Dioxide","Nitrous Oxide","Ozone"]
@@ -24,11 +23,19 @@ class HelperElements {
 
         // Calling Helper Methods
         this.drawTimeSlider();
-        this.drawToggle();
-        this.drawDropdown();
+  //    this.drawToggle();
+        this.addButtonListeners();
 
     }
     
+
+    addButtonListeners() {
+        d3.select('#coButton').on("click", () => this.updatePollutant("Carbon Monoxide"));
+        d3.select('#soButton').on("click", () => this.updatePollutant("Sulphur Dioxide"));
+        d3.select('#noButton').on("click", () => this.updatePollutant("Nitrous Oxide"));
+        d3.select('#o3Button').on("click", () => this.updatePollutant("Ozone"));
+    }
+
     /**
      * draws the time slider and
      * throws related events.
@@ -40,7 +47,6 @@ class HelperElements {
         // Making a scale for slider
         let timeScale = d3.scaleLinear().domain([2000, 2016]).range([30, 730]); 
 
-        console.log('Inside drawTimeSlider')
         d3.select("#slider")
             .append('div').classed('slider-wrap', true)
             .append('input').classed('slider', true)
@@ -63,11 +69,12 @@ class HelperElements {
      * and throws related events.
      */
     drawToggle() {
-        let svgBtn = d3.select('#buttons').append("div")
+        let svgBtn = d3.select('#buttons').append("div").classed('toggle-btn', true);
 
         // Toggle Button
-        svgBtn.append('span').text("Month")
+        svgBtn.append('span').text("MONTH  ");
 
+        
         svgBtn.append('span').append("label")
             .attr("id", "labelID")
             .attr("class", "switch")
@@ -78,8 +85,10 @@ class HelperElements {
         d3.select("#labelID").append("span")
             .attr("class", "tBtnSlider round")
 
-        svgBtn.append("span").text("Year")
+
+        svgBtn.append("span").text("   YEAR")
     }
+
     /*
      * draws the dropdown for 
      * pollutants and throws related events.

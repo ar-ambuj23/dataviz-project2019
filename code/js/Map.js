@@ -18,7 +18,7 @@ class Map {
         this.pollutionData = pollutionData;
         this.centered = null;
         this.width = 1000;
-        this.height = 600;
+        this.height = 800;
         this.activeTime = 2004;
         this.activePollutant = 'CARBON MONOXIDE';
 
@@ -42,12 +42,20 @@ class Map {
         MapView.append("div").attr("id", "buttons")
         MapView.append("div").attr("id", "slider")
         MapView.append("div").attr("id", "map")
+        MapView.append("div").attr("id", "info")
 
         var MapSVG = d3.select("#map")
                         .append("svg")
                         .attr("id", "map-svg")
                         .attr("width",this.width)
                         .attr("height", this.height);
+
+        var infoSVG = d3.select("#info")
+                        .append("svg")
+                        .attr("id", "info-svg")
+                        .attr("width", 500)
+                        .attr("height", 800);
+        //TODO: add projections to resize map
 
         var path = d3.geoPath();
  
@@ -76,7 +84,7 @@ class Map {
         var states = g.selectAll("path")
                 .data(topojson.feature(this.usData, this.usData.objects.states).features)
                 .style("fill", function(d) { 
-                    return 'lightgray';
+                    return 'white';
                 });
 
         
@@ -156,7 +164,7 @@ class Map {
           var centroid = path.centroid(d);
           x = centroid[0];
           y = centroid[1];
-          k = 4;
+          k = 2.5;
           this.centered = d;
         } else {
           x = this.width / 2;
@@ -170,7 +178,109 @@ class Map {
             .duration(750)
             .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
             .style("stroke-width", 1.5 / k + "px");
+
+        this.drawWikiBox(d);
     }
+
+
+
+    drawWikiBox(d) {
+        var state;
+        for(var stateData of this.stateDataArray) {
+            if(stateData.stateCode == d.id) {
+                state = stateData;
+                break;
+            }
+       }
+
+       var stateArray = new Array();
+
+       if(state == null) {
+        stateArray[0] = {"name": "", "value":"Sorry, we don't have anything on this one!", "class": "attribute-value"};
+       }
+
+       if(state) {
+        stateArray[0] = {"name": "", "value":state.state, "class": "state-text"};
+        stateArray[1] = {"name": "Carbon Monoxide:", "value": state.CO.toFixed(2), "class": "attribute-value"};
+        stateArray[2] = {"name" : "Sulfur Dioxide:", "value": state.SO2.toFixed(2), "class": "attribute-value" };
+        stateArray[3] = {"name" : "Nitrous Oxide:", "value": state.NO2.toFixed(2), "class": "attribute-value"};
+        stateArray[4] = {"name": "Ozone:", "value": state.O3.toFixed(2), "class": "attribute-value"};
+       }
+
+       let infoSVG = d3.select('#info-svg');
+
+       let infoLabels = infoSVG
+                        .selectAll("text")
+                        .data(stateArray);
+
+       let infoLabelsEnter = infoLabels.enter().append("text");
+
+       infoLabels.exit().remove(); 
+       
+       infoLabels = infoLabels.merge(infoLabelsEnter);
+
+       infoLabels.attr("x", function(d,i) { return 25; })
+            .attr("y", function(d,i) { return (i+1)*40; })
+            .attr("class", function(d,i) { return d.class;})
+            .attr('margin-bottom', 25)
+            .text(function(d,i) { return d.name +" " + d.value; });
+
+        var lineData = [ { "x": 25,   "y": 270},  { "x": 200,  "y": 270},
+                  { "x": 200,  "y": 270}, { "x": 200,  "y": 320},
+                  { "x": 200,  "y": 320},  { "x": 25, "y": 320},
+                  { "x": 24,  "y": 320},  { "x": 25, "y": 270} ];
+ 
+        var lineFunction = d3.line()
+                         .x(function(d) { return d.x; })
+                         .y(function(d) { return d.y; })
+                         .curve(d3.curveLinear);
+
+        let pathLabels = infoSVG
+                        .selectAll("path")
+                        .data(lineData);
+    
+        let pathLabelsEnter = pathLabels.enter().append("path");
+
+       pathLabelsEnter.exit().remove(); 
+       
+       pathLabels = pathLabels.merge(pathLabelsEnter);
+
+       pathLabels.attr("stroke", "#EEEEEE")
+                 .attr("d", lineFunction(lineData))
+                 .attr("stroke-width", 1)
+                 .attr("fill", "none");
+
+        var totalLength = pathLabels.node().getTotalLength();
+
+        pathLabels
+            .attr("stroke-dasharray", totalLength + " " + totalLength)
+            .attr("stroke-dashoffset", totalLength)
+            .transition()
+            .duration(2000)
+            .ease(d3.easeLinear)
+            .attr('id', 'path-label')
+            .attr("stroke-dashoffset", 0);
+        
+        let buttonText = infoSVG.selectAll('#button-text').data(['Explore']);
+
+        let buttonTextEnter = buttonText.enter().append('text');
+
+        buttonText.exit().remove();
+
+        buttonText = buttonText.merge(buttonTextEnter);
+
+        buttonText
+            .attr('x', 70.5)
+            .attr('y', 300)
+            .attr('id', 'button-text')
+            .classed('attribute-value', true)
+            .transition()
+            .duration(2000)
+            .ease(d3.easeLinear)
+            .text("Explore  ");
+    }
+
+
 
     /**
      * clears any state selection.
@@ -217,7 +327,7 @@ class Map {
                 return d3.scaleLinear()
                     .domain([0,d3.max(this.stateDataArray, function(d) { return d['CO'] })])
                     .interpolate(d3.interpolateRgb)
-                    .range(["#ffffff","#073f07"]);
+                    .range(["#f9fbe7","#c0ca33"]);
                 break;
 
              case 'SULPHUR DIOXIDE' :

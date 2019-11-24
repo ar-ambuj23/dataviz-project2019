@@ -1,17 +1,20 @@
 /* Map Styling */
+body {
+    background: #212121;
+}
 
-header {
-    font-size: 48px;
+.header-text {
+    font-size: 42px;
+    color: #EEEEEE;
     font-family: 'Raleway', sans-serif;
 }
 
 .light-hr {
     border: 1px solid #EEEEEE;
-    margin: 3px 10px 10px 10px;
 }
 
 .states{
-    fill: lightgrey;
+    fill: white;
 }
 
 .states :hover {
@@ -33,8 +36,8 @@ header {
     -webkit-appearance: none;
     width: 725px;
     height: 15px;
-    border-radius: 5px;
-    background: #d3d3d3;
+    border-radius: 0px;
+    background: #FFFFFF;
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
@@ -84,7 +87,7 @@ header {
 }
 
 #pollutantSelector {
-    font-size: 25px;
+    font-size: 18px;
     padding: 2px;
     float: right;
     margin-right: 10px;
@@ -111,18 +114,25 @@ header {
     left: 0;
     right: 0;
     bottom: 13px;
-    background-color: #ccc;
+    border-radius: 5px;
+    height: 10px;
+    border: 1px solid #EEEEEE;
+    background-color: #FFFFFF;
     -webkit-transition: .4s;
     transition: .4s;
 }
+
 #toggleSwitch.active{
     background: skyblue;
     width: 100px;
 }
+
 .tBtnSlider:before {
-    height: 25px;
-    width: 25px;
-    left: 4px;
+    height: 16px;
+    width: 16px;
+    left: 0px;
+    top: -2px;
+    border-radius: 10px;
     position: absolute;
     content: "";
     bottom: 1px;
@@ -145,12 +155,103 @@ input:focus + .tBtnSlider {
 }
 
 input:checked + .tBtnSlider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(47px);
+    -ms-transform: translateX(47px);
+    transform: translateX(47px);
 }
+
 toggle-button.active>.inner-circle{
     display:none;
     margin-left: 100px;
     transition:all 300ms ease-in-out;
+}
+
+#info-container {
+    color: #bdbdbd;
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+
+}
+
+.toggle-btn {
+    color: #EEEEEE;
+    font-family: 'Raleway', sans-serif;
+}
+
+.selector {
+    color: #EEEEEE;
+    background: transparent;
+    border: 1px solid #EEEEEE;
+    font-size: 14px;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.selector:hover {
+    color: #212121;
+    -webkit-box-shadow: 2px 7px 18px -8px rgba(179,179,179,1);
+    -moz-box-shadow: 2px 7px 18px -8px rgba(179,179,179,1);
+    box-shadow: 2px 7px 18px -8px rgba(179,179,179,1);
+    background: #EEEEEE;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    margin-right: 5px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.co {
+    background-color: #c0ca33;
+}
+
+.no {
+    background-color: #c51b8a;
+}
+
+.so {
+    background-color: #f03b20;
+}
+
+.o3 {
+    background-color: #1c9099;
+}
+
+#header {
+    position: absolute;
+    top: 10px;
+    width: 98%;
+    left: 10px;
+}
+
+.right {
+    float: right;
+    margin-left: 5px;
+}
+
+.view {
+    top: 200px;
+    position: absolute;
+}
+
+.attribute-value {
+    fill: #EEEEEE;
+    font-family: 'Raleway', sans-serif;
+    font-size: 24px;
+}
+
+#map, #info {
+    display: inline-block;
+}
+
+.state-text {
+    font-size: 54px;
+    fill: #EEEEEE;
+    font-family: 'Raleway', sans-serif;
 }
