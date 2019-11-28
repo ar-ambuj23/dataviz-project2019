@@ -194,92 +194,116 @@ class Map {
        }
 
        var stateArray = new Array();
-
-       if(state == null) {
-        stateArray[0] = {"name": "", "value":"Sorry, we don't have anything on this one!", "class": "attribute-value"};
-       }
+       var noStateArray = new Array();
 
        if(state) {
-        stateArray[0] = {"name": "", "value":state.state, "class": "state-text"};
-        stateArray[1] = {"name": "Carbon Monoxide:", "value": state.CO.toFixed(2), "class": "attribute-value"};
-        stateArray[2] = {"name" : "Sulfur Dioxide:", "value": state.SO2.toFixed(2), "class": "attribute-value" };
-        stateArray[3] = {"name" : "Nitrous Oxide:", "value": state.NO2.toFixed(2), "class": "attribute-value"};
-        stateArray[4] = {"name": "Ozone:", "value": state.O3.toFixed(2), "class": "attribute-value"};
-       }
+                        stateArray[0] = {"name": "", "value":state.state, "class": "state-text"};
+                        stateArray[1] = {"name": "Carbon Monoxide:", "value": state.CO.toFixed(2), "class": "attribute-value"};
+                        stateArray[2] = {"name" : "Sulfur Dioxide:", "value": state.SO2.toFixed(2), "class": "attribute-value" };
+                        stateArray[3] = {"name" : "Nitrous Oxide:", "value": state.NO2.toFixed(2), "class": "attribute-value"};
+                        stateArray[4] = {"name": "Ozone:", "value": state.O3.toFixed(2), "class": "attribute-value"};
+                    
 
-       let infoSVG = d3.select('#info-svg');
+                    let infoSVG = d3.select('#info-svg');
 
-       let infoLabels = infoSVG
-                        .selectAll("text")
-                        .data(stateArray);
+                    let infoLabels = infoSVG
+                                        .selectAll("text")
+                                        .data(stateArray);
 
-       let infoLabelsEnter = infoLabels.enter().append("text");
+                    let infoLabelsEnter = infoLabels.enter().append("text");
 
-       infoLabels.exit().remove(); 
-       
-       infoLabels = infoLabels.merge(infoLabelsEnter);
+                    infoLabels.exit().remove(); 
+                    
+                    infoLabels = infoLabels.merge(infoLabelsEnter);
 
-       infoLabels.attr("x", function(d,i) { return 25; })
-            .attr("y", function(d,i) { return (i+1)*40; })
-            .attr("class", function(d,i) { return d.class;})
-            .attr('margin-bottom', 25)
-            .text(function(d,i) { return d.name +" " + d.value; });
+                    infoLabels.attr("x", function(d,i) { return 25; })
+                            .attr("y", function(d,i) { return (i+1)*40; })
+                            .attr("class", function(d,i) { return d.class;})
+                            .attr('margin-bottom', 25)
+                            .text(function(d,i) { return d.name +" " + d.value; });
 
-        var lineData = [ { "x": 25,   "y": 270},  { "x": 200,  "y": 270},
-                  { "x": 200,  "y": 270}, { "x": 200,  "y": 320},
-                  { "x": 200,  "y": 320},  { "x": 25, "y": 320},
-                  { "x": 24,  "y": 320},  { "x": 25, "y": 270} ];
- 
-        var lineFunction = d3.line()
-                         .x(function(d) { return d.x; })
-                         .y(function(d) { return d.y; })
-                         .curve(d3.curveLinear);
+                        // For the line path around explore button
 
-        let pathLabels = infoSVG
-                        .selectAll("path")
-                        .data(lineData);
+                        var lineData = [ { "x": 25,   "y": 270},  { "x": 200,  "y": 270},
+                                { "x": 200,  "y": 270}, { "x": 200,  "y": 320},
+                                { "x": 200,  "y": 320},  { "x": 25, "y": 320},
+                                { "x": 24,  "y": 320},  { "x": 25, "y": 270} ];
+                
+                        var lineFunction = d3.line()
+                                        .x(function(d) { return d.x; })
+                                        .y(function(d) { return d.y; })
+                                        .curve(d3.curveLinear);
+
+                        let pathLabels = infoSVG
+                                        .selectAll("path")
+                                        .data(lineData);
+                    
+                        let pathLabelsEnter = pathLabels.enter().append("path");
+
+                        pathLabelsEnter.exit().remove(); 
+                        
+                        pathLabels = pathLabels.merge(pathLabelsEnter);
+
+                        pathLabels.attr("stroke", "#EEEEEE")
+                                    .attr("d", lineFunction(lineData))
+                                    .attr("stroke-width", 1)
+                                    .attr("fill", "none");
+
+                        var totalLength = pathLabels.node().getTotalLength();
+
+                        pathLabels
+                            .attr("stroke-dasharray", totalLength + " " + totalLength)
+                            .attr("stroke-dashoffset", totalLength)
+                            .transition()
+                            .duration(2000)
+                            .ease(d3.easeLinear)
+                            .attr('id', 'path-label')
+                            .attr("stroke-dashoffset", 0);
+
+                        // For the explore button
+                        
+                        let buttonText = infoSVG.selectAll('#button-text').data(['Explore']);
+
+                        let buttonTextEnter = buttonText.enter().append('text');
+
+                        buttonText.exit().remove();
+
+                        buttonText = buttonText.merge(buttonTextEnter);
+
+                        buttonText
+                            .attr('x', 70.5)
+                            .attr('y', 300)
+                            .attr('id', 'button-text')
+                            .classed('attribute-value', true)
+                            .transition()
+                            .duration(2000)
+                            .ease(d3.easeLinear)
+                            .text("Explore  ");
+                    }
     
-        let pathLabelsEnter = pathLabels.enter().append("path");
 
-       pathLabelsEnter.exit().remove(); 
-       
-       pathLabels = pathLabels.merge(pathLabelsEnter);
-
-       pathLabels.attr("stroke", "#EEEEEE")
-                 .attr("d", lineFunction(lineData))
-                 .attr("stroke-width", 1)
-                 .attr("fill", "none");
-
-        var totalLength = pathLabels.node().getTotalLength();
-
-        pathLabels
-            .attr("stroke-dasharray", totalLength + " " + totalLength)
-            .attr("stroke-dashoffset", totalLength)
-            .transition()
-            .duration(2000)
-            .ease(d3.easeLinear)
-            .attr('id', 'path-label')
-            .attr("stroke-dashoffset", 0);
+    if(state == null) {
+        noStateArray[0] = {"name": "", "value":"Sorry, we don't have anything on this one!", "class": "attribute-value"};
         
-        let buttonText = infoSVG.selectAll('#button-text').data(['Explore']);
+        let infoSVG = d3.select('#info-svg');
 
-        let buttonTextEnter = buttonText.enter().append('text');
+                    let infoLabels = infoSVG
+                                        .selectAll("text")
+                                        .data(noStateArray);
 
-        buttonText.exit().remove();
+                    let infoLabelsEnter = infoLabels.enter().append("text");
 
-        buttonText = buttonText.merge(buttonTextEnter);
+                    infoLabels.exit().remove(); 
+                    
+                    infoLabels = infoLabels.merge(infoLabelsEnter);
 
-        buttonText
-            .attr('x', 70.5)
-            .attr('y', 300)
-            .attr('id', 'button-text')
-            .classed('attribute-value', true)
-            .transition()
-            .duration(2000)
-            .ease(d3.easeLinear)
-            .text("Explore  ");
+                    infoLabels.attr("x", function(d,i) { return 25; })
+                            .attr("y", function(d,i) { return (i+1)*40; })
+                            .attr("class", function(d,i) { return d.class;})
+                            .attr('margin-bottom', 25)
+                            .text(function(d,i) { return d.name +" " + d.value; });
+       }
     }
-
 
 
     /**
