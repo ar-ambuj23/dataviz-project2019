@@ -246,7 +246,7 @@ toggle-button.active>.inner-circle{
     font-size: 24px;
 }
 
-#map, #info {
+#map, #info , #TableView{
     display: inline-block;
 }
 
@@ -254,4 +254,17 @@ toggle-button.active>.inner-circle{
     font-size: 54px;
     fill: #EEEEEE;
     font-family: 'Raleway', sans-serif;
+}
+
+/* Table properties */
+
+thead td, th {
+    cursor: s-resize;
+}
+thead{
+    background-color: lightcyan;
+}
+/*Table text */
+.TableText{
+    fill:white;
 }

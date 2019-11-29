@@ -24,6 +24,7 @@ class Map {
 
         this.stateDataArray = null;
 
+
     }
 
     /**
@@ -202,7 +203,7 @@ class Map {
                         stateArray[2] = {"name" : "Sulfur Dioxide:", "value": state.SO2.toFixed(2), "class": "attribute-value" };
                         stateArray[3] = {"name" : "Nitrous Oxide:", "value": state.NO2.toFixed(2), "class": "attribute-value"};
                         stateArray[4] = {"name": "Ozone:", "value": state.O3.toFixed(2), "class": "attribute-value"};
-                    
+
 
                     let infoSVG = d3.select('#info-svg');
 
