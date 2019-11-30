@@ -43,6 +43,7 @@ body {
     transition: opacity .2s;
     margin-bottom: 40px !important;
     margin: auto;
+    display: block;
 
 }
 
@@ -81,7 +82,6 @@ body {
 .slider-wrap {
     display: inline-block;
     float: left;
-    width: 750px;
 }
 
 .states-active {
@@ -288,3 +288,9 @@ toggle-button.active>.inner-circle{
     font-size: 12px;
     font-family: 'Raleway', sans-serif;
 }
+
+#slider {
+    display: block;
+    margin-bottom: 20px;
+}
+

@@ -21,6 +21,8 @@ class Map {
         this.width = screen.availWidth/2 - 50;
         this.height = this.width-200;
 
+        this.scaleFactor = this.setScaleFactor(screen.availWidth);
+
         this.activeTime = 2004;
         this.activePollutant = 'CARBON MONOXIDE';
         this.updatePrimaryChart = updatePrimaryChart;
@@ -53,7 +55,8 @@ class Map {
                         .append("svg")
                         .attr("id", "map-svg")
                         .attr("width", this.width)
-                        .attr("height", this.height);
+                        .attr("height", this.height)
+                        .attr('x', 0);
 
         var infoSVG = d3.select("#info")
                         .append("svg")
@@ -73,10 +76,13 @@ class Map {
                         .attr("width", screen.availWidth-50)
                         .attr("height", 300);
         
+        let translate1 = screen.availWidth/4+30;
+        let translate2 = screen.availWidth/2+30;
+        let translate3 = screen.availWidth*3/4+30;
         chartSVG.append('g').attr('id', 'CO-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate(40, 0)');   
-        chartSVG.append('g').attr('id', 'SO2-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate('+screen.availWidth/4+30+', 0)');
-        chartSVG.append('g').attr('id', 'NO2-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate('+screen.availWidth/2+30+', 0)');
-        chartSVG.append('g').attr('id', 'O3-group').attr('width', screen.availWidth/4 -10).attr('transform', 'translate('+screen.availWidth*3/4+30+', 0)');
+        chartSVG.append('g').attr('id', 'SO2-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate('+translate1+', 0)');
+        chartSVG.append('g').attr('id', 'NO2-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate('+translate2+', 0)');
+        chartSVG.append('g').attr('id', 'O3-group').attr('width', screen.availWidth/4 -10).attr('transform', 'translate('+translate3+', 0)');
 
         //TODO: add projections to resize map
 
@@ -89,7 +95,7 @@ class Map {
             .data(topojson.feature(this.usData, this.usData.objects.states).features)
             .enter().append("path")
             .attr("d", path)
-            .attr("transform", 'scale(0.6   , 0.6)')
+            .attr("transform", 'scale(+'+this.scaleFactor+','+this.scaleFactor+')')
             .on("click", d => this.highlightState(d, path));
 
         this.updateMapForTime(this.activeTime);
@@ -383,6 +389,21 @@ class Map {
             return stateData;
             
         }
+    
     }
 
+
+        setScaleFactor(width) {
+            
+            let scaleFactor = 1.2;
+
+            if(width <= 3000) scaleFactor = 0.8;
+
+            if(width <= 2000) scaleFactor = 0.6;
+
+            if(width <= 1024) scaleFactor = 0.4;
+
+            return scaleFactor;
+
+        }
 }

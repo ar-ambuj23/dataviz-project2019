@@ -47,7 +47,7 @@ class HelperElements {
         // Making a scale for slider
         let timeScale = d3.scaleLinear().domain([2000, 2016]).range([30, 730]); 
 
-        d3.select("#slider")
+        d3.select("#SliderView")
             .append('div').classed('slider-wrap', true)
             .append('input').classed('slider', true)
             .attr('type', 'range')

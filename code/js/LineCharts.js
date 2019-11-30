@@ -74,6 +74,10 @@ class LineCharts {
 
         let g = chartSVG.select('#'+prop+'-group');
 
+        let axis = g.selectAll('.axis');
+
+        axis.remove();
+
        // const xAxisGroup = g.append('g').classed('axis', true);
         const yAxisGroup = g.append('g').classed('axis', true);
 
