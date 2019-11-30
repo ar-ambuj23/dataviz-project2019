@@ -4,7 +4,7 @@ body {
 }
 
 .header-text {
-    font-size: 42px;
+    font-size: 32px;
     color: #EEEEEE;
     font-family: 'Raleway', sans-serif;
 }
@@ -34,24 +34,26 @@ body {
 
 .slider {
     -webkit-appearance: none;
-    width: 725px;
-    height: 15px;
-    border-radius: 0px;
-    background: #FFFFFF;
+    height: 8px;
+    border-radius: 3px;
+    background: #e0f2f1;
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
+    margin-bottom: 40px !important;
     margin: auto;
+
 }
 
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 25px;
-    height: 25px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
-    background: #212121;
+    background: #004d40;
+    border: 2px solid #e0f2f1;
     cursor: pointer;
 }
 
@@ -243,7 +245,7 @@ toggle-button.active>.inner-circle{
 .attribute-value {
     fill: #EEEEEE;
     font-family: 'Raleway', sans-serif;
-    font-size: 24px;
+    font-size: 18px;
 }
 
 #map, #info {
@@ -251,7 +253,38 @@ toggle-button.active>.inner-circle{
 }
 
 .state-text {
-    font-size: 54px;
+    font-size: 35px;
     fill: #EEEEEE;
+    font-family: 'Raleway', sans-serif;
+}
+
+.path {
+    fill: none;
+    stroke-width: 0.5px;
+}
+
+.CO-path {
+    stroke: #c0ca33;
+}
+
+.NO2-path {
+    stroke: #c51b8a;
+}
+
+.SO2-path {
+    stroke: #f03b20;
+}
+
+.O3-path {
+    stroke: #1c9099;
+}
+
+.axis {
+    color: #EEEEEE;
+}
+
+.website {
+    fill: #bdbdbd;
+    font-size: 12px;
     font-family: 'Raleway', sans-serif;
 }

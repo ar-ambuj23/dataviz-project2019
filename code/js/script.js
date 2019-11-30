@@ -8,15 +8,18 @@ d3.json('https://d3js.org/us-10m.v1.json').then( usMapData => {
 
     let mapObj = null;
     let helperObj = null;
+    let chartObj = null;
 
     d3.json('data/pollution_data_rolled_up.json').then( pollutionData => {
 
             //Create Map Object
-            mapObj = new Map(usMapData, pollutionData);
+            chartObj = new LineCharts();
+            mapObj = new Map(usMapData, pollutionData, updatePrimaryChart, updateComparableChart, clearCharts);
             mapObj.createMap();
 
             //Creating all the Helper Elements
             helperObj = new HelperElements(pollutionData, updatePollutant, updateTime);
+
 
     })
 
@@ -27,7 +30,19 @@ d3.json('https://d3js.org/us-10m.v1.json').then( usMapData => {
     function updatePollutant(pollutant) {
         mapObj.updateMapForPollutant(pollutant);
     }
+
+    function updatePrimaryChart(yearWiseStateData) {
+        chartObj.drawPrimary(yearWiseStateData);
+    }
        
+    function updateComparableChart(stateData) {
+        chartObj.drawComparable(stateData);
+    }
+
+    function clearCharts() {
+        chartObj.clearCharts();
+    }
+    
 });
 
     

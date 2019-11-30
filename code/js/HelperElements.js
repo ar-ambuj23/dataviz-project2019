@@ -54,7 +54,8 @@ class HelperElements {
             .attr('min', 2000)
             .attr('max', 2016)
             .attr('value', 2004)
-            .attr('id', 'time-slider');
+            .attr('id', 'time-slider')
+            .style('width', function(){return screen.availWidth/2 - 50 + 'px'});
 
         let timeSlider = d3.select('#time-slider');
 
