@@ -21,6 +21,8 @@ class HelperElements {
 
         this.updateTime = updateTime;
 
+
+
         // Calling Helper Methods
         this.drawTimeSlider();
     //  this.drawToggle();
@@ -30,11 +32,16 @@ class HelperElements {
     
 
     addButtonListeners() {
+        let that = this;
         d3.select('#coButton').on("click", () => this.updatePollutant("Carbon Monoxide"));
         d3.select('#soButton').on("click", () => this.updatePollutant("Sulphur Dioxide"));
         d3.select('#noButton').on("click", () => this.updatePollutant("Nitrous Oxide"));
         d3.select('#o3Button').on("click", () => this.updatePollutant("Ozone"));
+        //d3.select('#playButton').on("click", () => (()));
+
     }
+
+
 
     /**
      * draws the time slider and
@@ -42,8 +49,9 @@ class HelperElements {
      */
     drawTimeSlider() {
 
-        let that = this;
 
+
+        console.log("Hi there")
         // Making a scale for slider
         let timeScale = d3.scaleLinear().domain([2000, 2016]).range([30, 730]); 
 
