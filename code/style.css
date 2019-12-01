@@ -299,3 +299,17 @@ toggle-button.active>.inner-circle{
 #MapView{
     margin-top:30px;
 }
+
+.custom-table {
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    color: #EEEEEE;
+    border-left: 1px solid #bdbdbd;
+    overflow-y: scroll;
+}
+
+#tableBody {
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    color: #EEEEEE;
+}

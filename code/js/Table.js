@@ -6,7 +6,7 @@ class Table{
         this.tableElements = null;
 
         this.cell = {
-            "width": 140,
+            "width": 100,
             "height": 15,
             "buffer": 15
         };
@@ -28,10 +28,7 @@ class Table{
         });
 
         let that = this;
-
-        console.log('table appear')
-
-        that.updateTable()
+        that.updateTable();
 
     }
     sortState(){
@@ -44,6 +41,7 @@ class Table{
         that.clearTable();
         that.updateTable();
     }
+
     sortCo(){
         let that = this;
         this.tableElements.sort(function(a,b){
@@ -97,6 +95,7 @@ class Table{
             .attr("width", this.width)
             .attr("height", 2*this.height)
             .append("xhtml:table")
+            .attr("class", "custom-table");
 
         //Making the table header row
         let tableHeader = tableLayout.append('thead')
@@ -115,7 +114,7 @@ class Table{
             .data(this.tableHeaders).enter()
             .append('th')
             .attr("width",this.cell.width)
-            .attr("height",this.cell.height)
+            .attr("height",this.cell.height);
 
         //Making the other table rows
         let table = tableLayout.append('tbody')
@@ -177,6 +176,7 @@ class Table{
                                                 .attr("x",5) // giving a bit buffer gap between the line and the text in the table ##################
                                                 .attr("y",this.cell.height/2) // center of the cell ##################
                                                 .attr("transform", "translate(0,4)")
+                                                .style("fill", "#EEEEEE");                                
                                 
                 stateText.exit().remove() // Exit Text ##################
 
@@ -209,7 +209,7 @@ class Table{
                                                 .attr("x",this.cell.width/2 - 20) // giving a bit buffer gap between the line and the text in the table ##################
                                                 .attr("y",this.cell.height/2) // center of the cell ##################
                                                 .attr("transform", "translate(0,4)")
-                                
+                                                .style("fill", "#EEEEEE");                                
                 coText.exit().remove() // Exit Text ##################
 
                 coText = coText.merge(coText_enter) // Merge Text ##################
@@ -240,6 +240,7 @@ class Table{
                                                 .attr("x",this.cell.width/2 - 20) // giving a bit buffer gap between the line and the text in the table ##################
                                                 .attr("y",this.cell.height/2) // center of the cell ##################
                                                 .attr("transform", "translate(0,4)")
+                                                .style("fill", "#EEEEEE");                                
                                 
                 no2Text.exit().remove() // Exit Text ##################
 
@@ -271,6 +272,7 @@ class Table{
                                                 .attr("x",this.cell.width/2 - 20) // giving a bit buffer gap between the line and the text in the table ##################
                                                 .attr("y",this.cell.height/2) // center of the cell ##################
                                                 .attr("transform", "translate(0,4)")
+                                                .style("fill", "#EEEEEE");                                
                                 
                 o3Text.exit().remove() // Exit Text ##################
 
@@ -302,6 +304,7 @@ class Table{
                                                 .attr("x",this.cell.width/2 - 20) // giving a bit buffer gap between the line and the text in the table ##################
                                                 .attr("y",this.cell.height/2) // center of the cell ##################
                                                 .attr("transform", "translate(0,4)")
+                                                .style("fill", "#EEEEEE");                                
                                 
                 so2Text.exit().remove() // Exit Text ##################
 
