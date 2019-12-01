@@ -21,6 +21,8 @@ class HelperElements {
 
         this.updateTime = updateTime;
 
+        this.currentyear = 2004
+
         // Calling Helper Methods
         this.drawTimeSlider();
     //  this.drawToggle();
@@ -55,13 +57,28 @@ class HelperElements {
             .attr('max', 2016)
             .attr('value', 2004)
             .attr('id', 'time-slider')
-            .style('width', function(){return screen.availWidth/2 - 50 + 'px'});
+            .style('width', '730px');
+
+        let sliderLabel = d3.select('.slider-wrap')
+            .append('div').classed('slider-label', true)
+            .append('svg');
+
+        let sliderText = sliderLabel.append('text').text(this.currentyear);
+
+        sliderText.attr('x', timeScale(this.currentyear));
+        sliderText.attr('y', 25);
 
         let timeSlider = d3.select('#time-slider');
 
         timeSlider.on('input', function() {
             let time = this.value;
             that.updateTime(time);
+
+            //Changing the year label under the slider
+            let new_active_year = timeSlider.node().value
+            this.currentyear = new_active_year
+            sliderText.html(new_active_year)
+            sliderText.attr('x',timeScale(this.currentyear));
         });
     }
 

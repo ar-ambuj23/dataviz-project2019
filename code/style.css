@@ -41,7 +41,7 @@ body {
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
-    margin-bottom: 40px !important;
+    /* margin-bottom: 40px !important; */
     margin: auto;
     display: block;
 
@@ -71,12 +71,14 @@ body {
 }
 
 .slider-label svg {
+    fill: #bdbdbd;
     width: 750px;
     height: 35px;
 }
 
 .slider-label svg text {
     text-anchor: middle;
+    font-size: 17px;
 }
 
 .slider-wrap {
@@ -294,3 +296,6 @@ toggle-button.active>.inner-circle{
     margin-bottom: 20px;
 }
 
+#MapView{
+    margin-top:20px;
+}
