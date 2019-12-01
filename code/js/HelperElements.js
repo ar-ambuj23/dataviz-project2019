@@ -52,11 +52,11 @@ class HelperElements {
         
         // console.log("Play button clicked");
 
-        let i = 2000;
+        let i = this.currentyear;
         let j = 2017;
         function f() {
 
-            // console.log(that.stopValue)
+            // console.log('i',i)
             
             if(that.stopValue == true){
                 that.stopValue = false;
@@ -73,6 +73,7 @@ class HelperElements {
             }
         }
         f();
+        that.stopValue = false;
     }
 
     stop(){
@@ -115,6 +116,7 @@ class HelperElements {
 
         timeSlider.on('input', function() {
             let time = this.value;
+            that.currentyear = parseInt(time);
             that.updateTime(time);
 
             //Changing the year label under the slider
