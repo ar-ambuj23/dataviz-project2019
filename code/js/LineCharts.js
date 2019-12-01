@@ -17,7 +17,7 @@ class LineCharts {
     
 
     
-    drawComparable() {
+    drawComparable(yearWiseStateData) {
 
         this.drawChart(yearWiseStateData, 'CO', 1000);
         this.drawChart(yearWiseStateData, 'SO2', 2000);
