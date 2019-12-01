@@ -137,9 +137,10 @@ class Map {
 
 
         });
-
-
+        
         this.colorMap();
+        // this.updateTable(this.stateDataArray);  //uncomment this
+
 
     }
 
@@ -173,6 +174,7 @@ class Map {
 
         let x, y, k;
         if (d && this.centered !== d) {
+        //Zoom in 
           var centroid = path.centroid(d);
           x = centroid[0];
           y = centroid[1];
@@ -190,6 +192,7 @@ class Map {
           this.drawWikiBox(state);
           this.drawPrimaryChart(state);
         } else {
+        //Zoom out
           x = this.width / 1.1;
           y = this.height / 1.1;
           k = 1;
@@ -256,6 +259,7 @@ class Map {
         infoSVG.selectAll("text").remove();
 
         this.updateTable(this.stateDataArray);
+
     }
 
 

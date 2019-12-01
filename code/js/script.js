@@ -14,13 +14,15 @@ d3.json('https://d3js.org/us-10m.v1.json').then( usMapData => {
 
             //Create Map Object
             chartObj = new LineCharts();
+            tableObj = new Table();
+            
             mapObj = new Map(usMapData, pollutionData, updatePrimaryChart, updateComparableChart, clearCharts, updateTable, clearTable);
             mapObj.createMap();
 
             //Creating all the Helper Elements
             helperObj = new HelperElements(pollutionData, updatePollutant, updateTime);
 
-            tableObj = new Table();
+            
 
     })
 

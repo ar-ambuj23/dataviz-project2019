@@ -98,14 +98,6 @@ class Table{
             .append("xhtml:table")
             .attr('transform','translate(20,0)')
 
-
-        // let tableDiv = d3.select("#info-svg");
-
-        //append table to the div
-        // let table = tableDiv.append('table');
-        // let table = tableDiv.select("#dataTable").select("tbody").selectAll("tr").data(this.tableElements);
-
-
         table.append('thead').append('tr')
             .selectAll('th')
             .data(this.tableHeaders).enter()
@@ -233,6 +225,8 @@ class Table{
 
         //code to clear the table
         console.log('table disappear')
+
+        d3.select("info-svg").select("foreignObject").remove()
 
 
     }
