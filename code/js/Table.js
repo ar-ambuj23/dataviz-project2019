@@ -1,5 +1,6 @@
 class Table{
     constructor(){
+
         this.tableHeaders = ["STATE", "CO", "NO2", "OZONE", "SO2"];
 
         this.tableElements = null;
@@ -21,20 +22,21 @@ class Table{
     }
 
     drawTable(stateDataArray){
+
         this.tableElements = stateDataArray.filter(function(el){
             return el != null;
         });
 
         let that = this;
-        //code for table with stateDataArray
-        //select info box svg and make your table
-        //be aware bcz some objects in the stateDataArray will be null. Don't display these rows.
+
         console.log('table appear')
+
         d3.select("#state").on("click",function(){that.sortState();});
         d3.select("#co").on("click",function(){that.sortCo();});
         d3.select("#so2").on("click",function(){that.sortSo2();});
         d3.select("#no2").on("click",function(){that.sortNo2();});
         d3.select("#ozone").on("click",function(){that.sortOzone();});
+
         that.updateTable()
 
     }
@@ -87,137 +89,91 @@ class Table{
         that.updateTable();
     }
     updateTable() {
-        // console.log("Inside update table")
-        // console.log(this.tableElements)
         let that = this;
 
-        let table = d3.select("#info").select("svg")
+        //Making the table layout
+        let tableLayout = d3.select("#info").select("svg")
             .append("foreignObject")
             .attr("width", this.width)
             .attr("height", this.height)
             .append("xhtml:table")
-            .attr('transform','translate(20,0)')
+            // .attr('transform','translate(20,0)')
 
-        table.append('thead').append('tr')
+        //Making the table header row
+        tableLayout.append('thead').append('tr')
             .selectAll('th')
             .data(this.tableHeaders).enter()
             .append('th')
+            .attr("width",this.cell.width)
+            .attr("height",this.cell.height)
             .text(function(d){return d})
-            .exit().remove()
 
+        //Making the other table rows
+        let table = tableLayout.append('tbody')
+                        .selectAll("tr")
+                        .data(this.tableElements)
 
-        let tBody = table.append('tbody');
-        let tr = tBody.append('tr').data(this.tableElements);
-        let td = tr.append('td').data(function(d){
-            let rows = [ {vis:"text",value:d["State"]},
-                {vis:"CO", value:d["CO Mean"]},
-                {vis:"SO2", value:d["SO2 Mean"]},
-                {vis:"NO2", value:d["NO2 Mean"]},
-                {vis:"Ozone", value:d["O3 Mean"]}
+        let tableRows = table.enter()
+                            .append('tr')
+
+        table.exit().remove()
+        table = tableRows.merge(table)
+
+        //Populating the table rows
+        let row_tds = table.selectAll("td").data(function(d){
+
+            let rows = [
+
+                {vis: 'state', value:[d.state]}, 
+                {vis: 'co', value:[d.CO.toFixed(2)]},
+                {vis: 'no2', value:[d.NO2.toFixed(2)]},
+                {vis: 'o3', value:[d.O3.toFixed(2)]},
+                {vis: 'so2', value:[d.SO2.toFixed(2)]},
             ]
-            return rows;
-        }).enter();
+            return rows
+
+        })
+        
+        let row_tds_enter = row_tds.enter()
+                                    .append("td")
+                                    .attr("width",this.cell.width)
+                                    .attr("height",this.cell.height)
+
+                                                            
+        row_tds.exit().remove()
+
+        row_tds = row_tds.merge(row_tds_enter)
 
 
-        //create all the columns
-        // let td = table.selectAll("td").data(function(d){
-        //     let rows = [ {vis:"text",value:d["State"]},
-        //         {vis:"CO", value:d["CO Mean"]},
-        //         {vis:"SO2", value:d["SO2 Mean"]},
-        //         {vis:"NO2", value:d["NO2 Mean"]},
-        //         {vis:"Ozone", value:d["O3 Mean"]}
-        //     ]
-        //     return rows;
-        // });
-        // let td_val = td.enter().append("td");
-        // td.exit().remove();
-        // td = td_val.merge(td);
+        //Handling the State Column
+                let stateColumn = row_tds.filter((d) => {return d.vis == 'state'})
 
-        //State column
-        let stateColumn = table.selectAll('td').filter(d=>{ return d.vis == 'text';});
-        let stateColumnSvg = stateColumn.selectAll("svg").data(function(d){
-            return d3.select(this).data();
-        });
-        let stateColumnSvgEnter = stateColumnSvg.enter().append("svg");
-        stateColumnSvg.exit().remove();
-        stateColumnSvg = stateColumnSvgEnter.merge(stateColumnSvg);
-        stateColumnSvg.attr("width",this.cell.width).attr("height",this.cell.height);
-        let stateColumnSvgText = stateColumnSvg.selectAll("text").data(function(d){
-            return d3.select(this).data();
-        });
-        let stateColumnSvgTextEnter = stateColumnSvgText.enter().append("text");
-        stateColumnSvgText.exit().remove();
-        stateColumnSvgText = stateColumnSvgTextEnter.merge(stateColumnSvgText);
-        stateColumnSvgText.text(d=>d.value).attr("transform","translate(0,20)").classed("TableText",true);
+                let svgStateColumn = stateColumn.selectAll("svg").data(function(d){return d3.select(this).data()})
 
-        //CO column
-        let coColumn = table.selectAll('td').filter(d=>{ return d.vis == 'CO';});
-        let coColumnSvg = coColumn.selectAll("svg").data(function(d){
-            return d3.select(this).data();
-        });
-        let coColumnSvgEnter = coColumnSvg.enter().append("svg");
-        coColumnSvg.exit().remove();
-        coColumnSvg = coColumnSvgEnter.merge(coColumnSvg);
-        coColumnSvg.attr("width",this.cell.width).attr("height",this.cell.height);
-        let coColumnSvgText = coColumnSvg.selectAll("text").data(function(d){
-            return d3.select(this).data();
-        });
-        let coColumnSvgTextEnter = coColumnSvgText.enter().append("text");
-        coColumnSvgText.exit().remove();
-        coColumnSvgText = coColumnSvgTextEnter.merge(coColumnSvgText);
-        coColumnSvgText.text(d=>d.value).attr("transform","translate(0,20)").classed("TableText",true);
+                let svgStateColumn_enter = svgStateColumn.enter() 
+                                                            .append('svg')
+                                                            .attr('width', this.cell.width)
+                                                            .attr('height', this.cell.height)
 
-        //SO2 Column
-        let so2Column = table.selectAll('td').filter(d=>{ return d.vis == 'SO2';});
-        let so2ColumnSvg = so2Column.selectAll("svg").data(function(d){
-            return d3.select(this).data();
-        });
-        let so2ColumnSvgEnter = so2ColumnSvg.enter().append("svg");
-        so2ColumnSvg.exit().remove();
-        so2ColumnSvg = so2ColumnSvgEnter.merge(so2ColumnSvg);
-        so2ColumnSvg.attr("width",this.cell.width).attr("height",this.cell.height);
-        let so2ColumnSvgText = so2ColumnSvg.selectAll("text").data(function(d){
-            return d3.select(this).data();
-        });
-        let so2ColumnSvgTextEnter = so2ColumnSvgText.enter().append("text");
-        so2ColumnSvgText.exit().remove();
-        so2ColumnSvgText = so2ColumnSvgTextEnter.merge(so2ColumnSvgText);
-        so2ColumnSvgText.text(d=>d.value).attr("transform","translate(0,20)").classed("TableText",true);
+                svgStateColumn.exit().remove() 
 
-        //NO2 Column
-        let no2Column = table.selectAll('td').filter(d=>{ return d.vis == 'NO2';});
-        let no2ColumnSvg = no2Column.selectAll("svg").data(function(d){
-            return d3.select(this).data();
-        });
-        let no2ColumnSvgEnter = no2ColumnSvg.enter().append("svg");
-        no2ColumnSvg.exit().remove();
-        no2ColumnSvg = no2ColumnSvgEnter.merge(no2ColumnSvg);
-        no2ColumnSvg.attr("width",this.cell.width).attr("height",this.cell.height);
-        let no2ColumnSvgText = no2ColumnSvg.selectAll("text").data(function(d){
-            return d3.select(this).data();
-        });
-        let no2ColumnSvgTextEnter = no2ColumnSvgText.enter().append("text");
-        no2ColumnSvgText.exit().remove();
-        no2ColumnSvgText = no2ColumnSvgTextEnter.merge(no2ColumnSvgText);
-        no2ColumnSvgText.text(d=>d.value).attr("transform","translate(0,20)").classed("TableText",true);
+                svgStateColumn = svgStateColumn.merge(svgStateColumn_enter)
 
+                // Adding text to State Column
+                let stateText = svgStateColumn.selectAll('text').data(d =>(d.value)) // Add text to selection ##################
 
-        //Ozone Column
-        let OzoneColumn = table.selectAll('td').filter(d=>{ return d.vis == 'Ozone';});
-        let OzoneColumnSvg = OzoneColumn.selectAll("svg").data(function(d){
-            return d3.select(this).data();
-        });
-        let OzoneColumnSvgEnter = OzoneColumnSvg.enter().append("svg");
-        OzoneColumnSvg.exit().remove();
-        OzoneColumnSvg = OzoneColumnSvgEnter.merge(OzoneColumnSvg);
-        OzoneColumnSvg.attr("width",this.cell.width).attr("height",this.cell.height);
-        let OzoneColumnSvgText = OzoneColumnSvg.selectAll("text").data(function(d){
-            return d3.select(this).data();
-        });
-        let OzoneColumnSvgTextEnter = OzoneColumnSvgText.enter().append("text");
-        OzoneColumnSvgText.exit().remove();
-        OzoneColumnSvgText = OzoneColumnSvgTextEnter.merge(OzoneColumnSvgText);
-        OzoneColumnSvgText.text(d=>d.value).attr("transform","translate(0,20)").classed("TableText",true);
+                let stateText_enter = stateText.enter() // Text Enter ##################
+                                                .append('text')
+                                                .attr("x",5) // giving a bit buffer gap between the line and the text in the table ##################
+                                                .attr("y",this.cell.height/2) // center of the cell ##################
+                                                .attr("transform", "translate(0,4)")
+                                
+                stateText.exit().remove() // Exit Text ##################
+
+                stateText = stateText.merge(stateText_enter) // Merge Text ##################
+
+                stateText.text(d => d) // Display Text ##################
+                        .attr("id","stateText")
 
     }
 
@@ -227,6 +183,7 @@ class Table{
         console.log('table disappear')
 
         d3.select("info-svg").select("foreignObject").remove()
+        d3.select("info-svg").select("table").remove()
 
 
     }

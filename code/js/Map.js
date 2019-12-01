@@ -139,7 +139,7 @@ class Map {
         });
         
         this.colorMap();
-        // this.updateTable(this.stateDataArray);  //uncomment this
+        this.updateTable(this.stateDataArray);  //uncomment this
 
 
     }
