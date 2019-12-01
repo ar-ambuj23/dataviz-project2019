@@ -6,7 +6,7 @@ class Table{
         this.tableElements = null;
 
         this.cell = {
-            "width": 70,
+            "width": 140,
             "height": 25,
             "buffer": 15
         };
@@ -174,6 +174,38 @@ class Table{
 
                 stateText.text(d => d) // Display Text ##################
                         .attr("id","stateText")
+
+
+
+        //Handling the CO Column
+                let coColumn = row_tds.filter((d) => {return d.vis == 'co'})
+
+                let svgcoColumn = coColumn.selectAll("svg").data(function(d){return d3.select(this).data()})
+
+                let svgcoColumn_enter = svgcoColumn.enter() 
+                                                            .append('svg')
+                                                            .attr('width', this.cell.width)
+                                                            .attr('height', this.cell.height)
+
+                svgcoColumn.exit().remove() 
+
+                svgcoColumn = svgcoColumn.merge(svgcoColumn_enter)
+
+                // Adding text to CO Column
+                let coText = svgcoColumn.selectAll('text').data(d =>(d.value)) // Add text to selection ##################
+
+                let coText_enter = coText.enter() // Text Enter ##################
+                                                .append('text')
+                                                .attr("x",5) // giving a bit buffer gap between the line and the text in the table ##################
+                                                .attr("y",this.cell.height/2) // center of the cell ##################
+                                                .attr("transform", "translate(0,4)")
+                                
+                coText.exit().remove() // Exit Text ##################
+
+                coText = coText.merge(coText_enter) // Merge Text ##################
+
+                coText.text(d => d) // Display Text ##################
+                        .attr("id","coText")
 
     }
 
