@@ -11,8 +11,8 @@ class HelperElements {
  */
     constructor(pollutionData, updatePollutant, updateTime) {
         
-        // Making a list of options for drop down
-        this.pollutantList = ["Carbon Monoxide", "Sulphur Dioxide","Nitrous Oxide","Ozone"]
+        // // Making a list of options for drop down
+        // this.pollutantList = ["Carbon Monoxide", "Sulphur Dioxide","Nitrous Oxide","Ozone"]
         
         //Making Pollution Data a class variable
         this.pollutionData = pollutionData;
@@ -23,7 +23,7 @@ class HelperElements {
 
         // Calling Helper Methods
         this.drawTimeSlider();
-  //    this.drawToggle();
+    //  this.drawToggle();
         this.addButtonListeners();
 
     }
@@ -90,37 +90,37 @@ class HelperElements {
         svgBtn.append("span").text("   YEAR")
     }
 
-    /*
-     * draws the dropdown for 
-     * pollutants and throws related events.
-     */
-    drawDropdown(pollutantList) {
+    // /*
+    //  * draws the dropdown for 
+    //  * pollutants and throws related events.
+    //  */
+    // drawDropdown(pollutantList) {
 
-        let that = this;
+    //     let that = this;
 
-        let option_select = d3.select("#buttons")
-                .append("div")
-                .append("select")
-                .attr("id", "pollutantSelector")
+    //     let option_select = d3.select("#buttons")
+    //             .append("div")
+    //             .append("select")
+    //             .attr("id", "pollutantSelector")
 
-        for (var i = 0; i < this.pollutantList.length; i++) {
-            var opt = option_select.append("option")
-            .attr("value", this.pollutantList[i])
-            .text(this.pollutantList[i]);
-        }
+    //     for (var i = 0; i < this.pollutantList.length; i++) {
+    //         var opt = option_select.append("option")
+    //         .attr("value", this.pollutantList[i])
+    //         .text(this.pollutantList[i]);
+    //     }
 
-        option_select.on('change', function(d, i) {
-            let selectedPollutant = this.options[this.selectedIndex].value;
-            that.updatePollutant(selectedPollutant);
-        });
-    }
+    //     option_select.on('change', function(d, i) {
+    //         let selectedPollutant = this.options[this.selectedIndex].value;
+    //         that.updatePollutant(selectedPollutant);
+    //     });
+    // }
 
-    /**
-     * draws the info-box when a 
-     * particular state is selected.
-     */
-    drawInfoBox(state, time, timePeriod) {
+    // /**
+    //  * draws the info-box when a 
+    //  * particular state is selected.
+    //  */
+    // drawInfoBox(state, time, timePeriod) {
 
-    }
+    // }
     
 }

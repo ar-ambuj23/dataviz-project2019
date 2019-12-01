@@ -62,14 +62,14 @@ class LineCharts {
 
         let iScale = d3.scaleLinear().domain([0, data.length]).range([0, screenWidth/4 - 60]); 
 
-        let propScale = d3.scaleLinear().domain([0, d3.max(data, (d) => {if(d) return d[prop]})]).range([0, 200]); 
+        // let propScale = d3.scaleLinear().domain([0, d3.max(data, (d) => {if(d) return d[prop]})]).range([190,0]); 
 
-        let yScale = d3.scaleLinear().domain([0, d3.max(data, (d) => {if(d) return d[prop]})]).range([0, 200]).nice(); 
+        let yScale = d3.scaleLinear().domain([0, d3.max(data, (d) => {if(d) return d[prop]})]).range([190, 0]);
 
         let lineGenerator = d3
             .line()
             .x((d, i) => iScale(i))
-            .y(d => {if(d) return propScale(d[prop])});
+            .y(d => {if(d) return yScale(d[prop])});
 
 
         let g = chartSVG.select('#'+prop+'-group');
