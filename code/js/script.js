@@ -14,12 +14,13 @@ d3.json('https://d3js.org/us-10m.v1.json').then( usMapData => {
 
             //Create Map Object
             chartObj = new LineCharts();
-            mapObj = new Map(usMapData, pollutionData, updatePrimaryChart, updateComparableChart, clearCharts);
+            mapObj = new Map(usMapData, pollutionData, updatePrimaryChart, updateComparableChart, clearCharts, updateTable, clearTable);
             mapObj.createMap();
 
             //Creating all the Helper Elements
             helperObj = new HelperElements(pollutionData, updatePollutant, updateTime);
 
+            tableObj = new Table();
 
     })
 
@@ -41,6 +42,14 @@ d3.json('https://d3js.org/us-10m.v1.json').then( usMapData => {
 
     function clearCharts() {
         chartObj.clearCharts();
+    }
+
+    function updateTable(stateDataArray){
+        tableObj.drawTable(stateDataArray);
+    }
+
+    function clearTable() {
+        tableObj.clearTable();
     }
     
 });

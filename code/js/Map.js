@@ -13,7 +13,7 @@ class StateData {
 
 class Map {
 
-    constructor(usData, pollutionData, updatePrimaryChart, updateComparableChart, clearCharts) {
+    constructor(usData, pollutionData, updatePrimaryChart, updateComparableChart, clearCharts, updateTable, clearTable) {
         this.usData = usData;
         this.pollutionData = pollutionData;
         this.centered = null;
@@ -29,6 +29,9 @@ class Map {
         this.updateComparableChart = updateComparableChart;
         this.stateDataArray = null;
         this.clearCharts = clearCharts;
+
+        this.updateTable = updateTable;
+        this.clearTable = clearTable;
 
     }
 
@@ -135,6 +138,7 @@ class Map {
 
         });
 
+
         this.colorMap();
 
     }
@@ -181,7 +185,8 @@ class Map {
                   break;
               }
           }
-  
+          
+          this.clearTable();
           this.drawWikiBox(state);
           this.drawPrimaryChart(state);
         } else {
@@ -249,6 +254,8 @@ class Map {
 
         let infoSVG = d3.select('#info-svg');
         infoSVG.selectAll("text").remove();
+
+        this.updateTable(this.stateDataArray);
     }
 
 
