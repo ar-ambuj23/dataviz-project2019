@@ -371,6 +371,8 @@ class Map {
 
         if(stateDataArrayTimewise.length > 0) {
 
+            let length = stateDataArrayTimewise.length
+
             let totalNO2AQI = d3.sum(stateDataArrayTimewise, d => d['NO2 AQI']);
 
             let totalCOAQI = d3.sum(stateDataArrayTimewise, d => d['CO AQI']);
@@ -384,7 +386,7 @@ class Map {
             let state = stateDataArrayTimewise[0]['State'];
             
             let stateData = new StateData(stateCode, state, year,
-                totalSO2AQI, totalNO2AQI, totalO3AQI, totalCOAQI);
+                totalSO2AQI/length, totalNO2AQI/length, totalO3AQI/length, totalCOAQI/length);
 
             return stateData;
             
