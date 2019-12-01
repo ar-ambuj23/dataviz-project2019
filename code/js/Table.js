@@ -7,7 +7,7 @@ class Table{
 
         this.cell = {
             "width": 140,
-            "height": 25,
+            "height": 15,
             "buffer": 15
         };
 
@@ -94,6 +94,7 @@ class Table{
         //Making the table layout
         let tableLayout = d3.select("#info").select("svg")
             .append("foreignObject")
+            .attr("id","fObj")
             .attr("width", this.width)
             .attr("height", this.height)
             .append("xhtml:table")
@@ -308,8 +309,7 @@ class Table{
         //code to clear the table
         console.log('table disappear')
 
-        d3.select("info-svg").select("foreignObject").remove()
-        d3.select("info-svg").select("table").remove()
+        d3.select("#fObj").remove()
 
 
     }

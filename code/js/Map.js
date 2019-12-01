@@ -13,7 +13,7 @@ class StateData {
 
 class Map {
 
-    constructor(usData, pollutionData, updatePrimaryChart, updateComparableChart, clearCharts, updateTable, clearTable) {
+    constructor(usData, pollutionData, updatePrimaryChart, updateComparableChart, clearCharts, updateTable, tableClear) {
         this.usData = usData;
         this.pollutionData = pollutionData;
         this.centered = null;
@@ -31,7 +31,7 @@ class Map {
         this.clearCharts = clearCharts;
 
         this.updateTable = updateTable;
-        this.clearTable = clearTable;
+        this.tableClear = tableClear;
 
     }
 
@@ -139,6 +139,7 @@ class Map {
         });
         
         this.colorMap();
+        this.tableClear();
         this.updateTable(this.stateDataArray);  //uncomment this
 
 
@@ -188,7 +189,7 @@ class Map {
               }
           }
           
-          this.clearTable();
+          this.tableClear();
           this.drawWikiBox(state);
           this.drawPrimaryChart(state);
         } else {

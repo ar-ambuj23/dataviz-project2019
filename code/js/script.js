@@ -16,7 +16,7 @@ d3.json('https://d3js.org/us-10m.v1.json').then( usMapData => {
             chartObj = new LineCharts();
             tableObj = new Table();
             
-            mapObj = new Map(usMapData, pollutionData, updatePrimaryChart, updateComparableChart, clearCharts, updateTable, clearTable);
+            mapObj = new Map(usMapData, pollutionData, updatePrimaryChart, updateComparableChart, clearCharts, updateTable, tableClear);
             mapObj.createMap();
 
             //Creating all the Helper Elements
@@ -50,7 +50,7 @@ d3.json('https://d3js.org/us-10m.v1.json').then( usMapData => {
         tableObj.drawTable(stateDataArray);
     }
 
-    function clearTable() {
+    function tableClear() {
         tableObj.clearTable();
     }
     
