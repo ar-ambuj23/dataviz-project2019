@@ -111,6 +111,7 @@ class Table{
 
         //Making the other table rows
         let table = tableLayout.append('tbody')
+                        .attr("id","tableBody")
                         .selectAll("tr")
                         .data(this.tableElements)
 
@@ -197,7 +198,7 @@ class Table{
 
                 let coText_enter = coText.enter() // Text Enter ##################
                                                 .append('text')
-                                                .attr("x",5) // giving a bit buffer gap between the line and the text in the table ##################
+                                                .attr("x",this.cell.width/2 - 20) // giving a bit buffer gap between the line and the text in the table ##################
                                                 .attr("y",this.cell.height/2) // center of the cell ##################
                                                 .attr("transform", "translate(0,4)")
                                 
@@ -228,7 +229,7 @@ class Table{
 
                 let no2Text_enter = no2Text.enter() // Text Enter ##################
                                                 .append('text')
-                                                .attr("x",5) // giving a bit buffer gap between the line and the text in the table ##################
+                                                .attr("x",this.cell.width/2 - 20) // giving a bit buffer gap between the line and the text in the table ##################
                                                 .attr("y",this.cell.height/2) // center of the cell ##################
                                                 .attr("transform", "translate(0,4)")
                                 
@@ -259,7 +260,7 @@ class Table{
 
                 let o3Text_enter = o3Text.enter() // Text Enter ##################
                                                 .append('text')
-                                                .attr("x",5) // giving a bit buffer gap between the line and the text in the table ##################
+                                                .attr("x",this.cell.width/2 - 20) // giving a bit buffer gap between the line and the text in the table ##################
                                                 .attr("y",this.cell.height/2) // center of the cell ##################
                                                 .attr("transform", "translate(0,4)")
                                 
@@ -290,7 +291,7 @@ class Table{
 
                 let so2Text_enter = so2Text.enter() // Text Enter ##################
                                                 .append('text')
-                                                .attr("x",5) // giving a bit buffer gap between the line and the text in the table ##################
+                                                .attr("x",this.cell.width/2 - 20) // giving a bit buffer gap between the line and the text in the table ##################
                                                 .attr("y",this.cell.height/2) // center of the cell ##################
                                                 .attr("transform", "translate(0,4)")
                                 
@@ -300,6 +301,11 @@ class Table{
 
                 so2Text.text(d => d) // Display Text ##################
                         .attr("id","coText")
+            
+        d3.select("#tableBody")
+            .selectAll("tr")
+            .selectAll("text")
+            .attr("text-align","center")
 
 
     }
