@@ -49,6 +49,9 @@ class HelperElements {
         let i = 2000;
         let j = 2017;
         function f() {
+            that.clearSlider();
+            that.currentyear = i;
+            that.drawTimeSlider();
             that.updateTime(i);
             i++;
             if( i < j ){
@@ -76,7 +79,7 @@ class HelperElements {
             .attr('type', 'range')
             .attr('min', 2000)
             .attr('max', 2016)
-            .attr('value', 2004)
+            .attr('value', this.currentyear)
             .attr('id', 'time-slider')
             .style('width', '730px');
 
@@ -101,6 +104,10 @@ class HelperElements {
             sliderText.html(new_active_year)
             sliderText.attr('x',timeScale(this.currentyear));
         });
+    }
+
+    clearSlider(){
+        d3.select("#SliderView").select(".slider-wrap").remove()
     }
 
     /**
