@@ -32,11 +32,32 @@ class HelperElements {
     
 
     addButtonListeners() {
+        let that = this;
         d3.select('#coButton').on("click", () => this.updatePollutant("Carbon Monoxide"));
         d3.select('#soButton').on("click", () => this.updatePollutant("Sulphur Dioxide"));
         d3.select('#noButton').on("click", () => this.updatePollutant("Nitrous Oxide"));
         d3.select('#o3Button').on("click", () => this.updatePollutant("Ozone"));
+        d3.select('#playButton').on("click", function(){
+            return that.play();
+        })
+
     }
+    play(){
+        let that = this;
+        console.log("Play button clicked");
+
+        let i = 2000;
+        let j = 2017;
+        function f() {
+            that.updateTime(i);
+            i++;
+            if( i < j ){
+                setTimeout( f, 1000 );
+            }
+        }
+        f();
+    }
+
 
     /**
      * draws the time slider and

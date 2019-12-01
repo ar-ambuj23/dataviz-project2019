@@ -280,7 +280,7 @@ class Table{
                         .attr("id","coText")
 
 
-        //Handling the O3 Column
+        //Handling the so2 Column
                 let so2Column = row_tds.filter((d) => {return d.vis == 'so2'})
 
                 let svgso2Column = so2Column.selectAll("svg").data(function(d){return d3.select(this).data()})
