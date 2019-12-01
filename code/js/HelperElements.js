@@ -52,6 +52,8 @@ class HelperElements {
         
         // console.log("Play button clicked");
 
+        d3.select('#info-svg').selectAll("text").remove();
+
         let i = this.currentyear;
         let j = 2017;
         function f() {
