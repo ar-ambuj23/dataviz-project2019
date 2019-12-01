@@ -47,8 +47,6 @@ class Map {
 
         var MapView = d3.select("#MapView")
 
-        MapView.append("div").attr("id", "buttons");
-        MapView.append("div").attr("id", "slider");
         MapView.append("div").attr("id", "map");
         MapView.append("div").attr("id", "info");
         MapView.append("div").attr("id", "break");

@@ -1,7 +1,7 @@
 class Table{
     constructor(){
 
-        this.tableHeaders = ["STATE", "CO", "NO2", "OZONE", "SO2"];
+        this.tableHeaders = ["State", "Carbon Monoxide", "Nitrous Oxide", "Ozone", "Sulphur Dioxide"];
 
         this.tableElements = null;
 
@@ -95,19 +95,27 @@ class Table{
             .append("foreignObject")
             .attr("id","fObj")
             .attr("width", this.width)
-            .attr("height", this.height)
+            .attr("height", 2*this.height)
             .append("xhtml:table")
-            // .attr('transform','translate(20,0)')
 
         //Making the table header row
-        tableLayout.append('thead').append('tr')
+        let tableHeader = tableLayout.append('thead')
+        
+        tableHeader.append('tr')
+            .selectAll('th')
+            .data(this.tableHeaders).enter()
+            .append('th')
+            .attr("width",this.cell.width)
+            .attr("height",this.cell.height/2)
+            .text(function(d){return d})
+            .attr("id",function(d){return d})
+        
+        tableHeader.append("tr")
             .selectAll('th')
             .data(this.tableHeaders).enter()
             .append('th')
             .attr("width",this.cell.width)
             .attr("height",this.cell.height)
-            .text(function(d){return d})
-            .attr("id",function(d){return d})
 
         //Making the other table rows
         let table = tableLayout.append('tbody')
@@ -303,11 +311,12 @@ class Table{
                         .attr("id","coText")
             
 
-        d3.select("#STATE").on("click",function(){that.sortState();});
-        d3.select("#CO").on("click",function(){that.sortCo();});
-        d3.select("#SO2").on("click",function(){that.sortSo2();});
-        d3.select("#NO2").on("click",function(){that.sortNo2();});
-        d3.select("#OZONE").on("click",function(){that.sortOzone();});
+        d3.select("#State").on("click",function(){that.sortState();});
+        d3.select("#Carbon\\ Monoxide").on("click",function(){that.sortCo();});
+        d3.select("#Sulphur\\ Dioxide").on("click",function(){that.sortSo2();});
+        d3.select("#Nitrous\\ Oxide").on("click",function(){that.sortNo2();});
+        d3.select("#Ozone").on("click",function(){that.sortOzone();});
+
 
 
     }
