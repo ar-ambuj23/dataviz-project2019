@@ -207,6 +207,100 @@ class Table{
                 coText.text(d => d) // Display Text ##################
                         .attr("id","coText")
 
+
+        //Handling the NO2 Column
+                let no2Column = row_tds.filter((d) => {return d.vis == 'no2'})
+
+                let svgno2Column = no2Column.selectAll("svg").data(function(d){return d3.select(this).data()})
+
+                let svgno2Column_enter = svgno2Column.enter() 
+                                                            .append('svg')
+                                                            .attr('width', this.cell.width)
+                                                            .attr('height', this.cell.height)
+
+                svgno2Column.exit().remove() 
+
+                svgno2Column = svgno2Column.merge(svgno2Column_enter)
+
+                // Adding text to NO2 Column
+                let no2Text = svgno2Column.selectAll('text').data(d =>(d.value)) // Add text to selection ##################
+
+                let no2Text_enter = no2Text.enter() // Text Enter ##################
+                                                .append('text')
+                                                .attr("x",5) // giving a bit buffer gap between the line and the text in the table ##################
+                                                .attr("y",this.cell.height/2) // center of the cell ##################
+                                                .attr("transform", "translate(0,4)")
+                                
+                no2Text.exit().remove() // Exit Text ##################
+
+                no2Text = no2Text.merge(no2Text_enter) // Merge Text ##################
+
+                no2Text.text(d => d) // Display Text ##################
+                        .attr("id","no2Text")
+
+
+        //Handling the O3 Column
+                let o3Column = row_tds.filter((d) => {return d.vis == 'o3'})
+
+                let svgo3Column = o3Column.selectAll("svg").data(function(d){return d3.select(this).data()})
+
+                let svgo3Column_enter = svgo3Column.enter() 
+                                                            .append('svg')
+                                                            .attr('width', this.cell.width)
+                                                            .attr('height', this.cell.height)
+
+                svgo3Column.exit().remove() 
+
+                svgo3Column = svgo3Column.merge(svgo3Column_enter)
+
+                // Adding text to O3 Column
+                let o3Text = svgo3Column.selectAll('text').data(d =>(d.value)) // Add text to selection ##################
+
+                let o3Text_enter = o3Text.enter() // Text Enter ##################
+                                                .append('text')
+                                                .attr("x",5) // giving a bit buffer gap between the line and the text in the table ##################
+                                                .attr("y",this.cell.height/2) // center of the cell ##################
+                                                .attr("transform", "translate(0,4)")
+                                
+                o3Text.exit().remove() // Exit Text ##################
+
+                o3Text = o3Text.merge(o3Text_enter) // Merge Text ##################
+
+                o3Text.text(d => d) // Display Text ##################
+                        .attr("id","coText")
+
+
+        //Handling the O3 Column
+                let so2Column = row_tds.filter((d) => {return d.vis == 'so2'})
+
+                let svgso2Column = so2Column.selectAll("svg").data(function(d){return d3.select(this).data()})
+
+                let svgso2Column_enter = svgso2Column.enter() 
+                                                            .append('svg')
+                                                            .attr('width', this.cell.width)
+                                                            .attr('height', this.cell.height)
+
+                svgso2Column.exit().remove() 
+
+                svgso2Column = svgso2Column.merge(svgso2Column_enter)
+
+                // Adding text to O3 Column
+                let so2Text = svgso2Column.selectAll('text').data(d =>(d.value)) // Add text to selection ##################
+
+                let so2Text_enter = so2Text.enter() // Text Enter ##################
+                                                .append('text')
+                                                .attr("x",5) // giving a bit buffer gap between the line and the text in the table ##################
+                                                .attr("y",this.cell.height/2) // center of the cell ##################
+                                                .attr("transform", "translate(0,4)")
+                                
+                so2Text.exit().remove() // Exit Text ##################
+
+                so2Text = so2Text.merge(so2Text_enter) // Merge Text ##################
+
+                so2Text.text(d => d) // Display Text ##################
+                        .attr("id","coText")
+
+
     }
 
     clearTable(){
