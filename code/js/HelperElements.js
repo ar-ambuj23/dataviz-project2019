@@ -117,8 +117,9 @@ class HelperElements {
         timeSlider.on('input', function() {
             let time = this.value;
             that.currentyear = parseInt(time);
+            d3.select('#info-svg').selectAll("text").remove();
             that.updateTime(time);
-
+            
             //Changing the year label under the slider
             let new_active_year = timeSlider.node().value
             this.currentyear = new_active_year

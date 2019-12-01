@@ -32,7 +32,6 @@ class Map {
 
         this.updateTable = updateTable;
         this.tableClear = tableClear;
-
     }
 
     /**
@@ -176,6 +175,8 @@ class Map {
         let x, y, k;
         if (d && this.centered !== d) {
         //Zoom in 
+        // console.log('Zoom in')
+
           var centroid = path.centroid(d);
           x = centroid[0];
           y = centroid[1];
@@ -194,6 +195,8 @@ class Map {
           this.drawPrimaryChart(state);
         } else {
         //Zoom out
+        // console.log('Zoom out')
+
           x = this.width / 1.1;
           y = this.height / 1.1;
           k = 1;
