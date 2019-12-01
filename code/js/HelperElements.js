@@ -28,6 +28,8 @@ class HelperElements {
     //  this.drawToggle();
         this.addButtonListeners();
 
+        this.stopValue = false;
+
     }
     
 
@@ -40,15 +42,27 @@ class HelperElements {
         d3.select('#playButton').on("click", function(){
             return that.play();
         })
-
+        d3.select('#stopButton').on("click", function(){
+            return that.stop();
+        })
     }
+
     play(){
         let that = this;
-        console.log("Play button clicked");
+        
+        // console.log("Play button clicked");
 
         let i = 2000;
         let j = 2017;
         function f() {
+
+            // console.log(that.stopValue)
+            
+            if(that.stopValue == true){
+                that.stopValue = false;
+                return
+            }
+
             that.clearSlider();
             that.currentyear = i;
             that.drawTimeSlider();
@@ -59,6 +73,11 @@ class HelperElements {
             }
         }
         f();
+    }
+
+    stop(){
+        this.stopValue = true;
+        // console.log('stop fn')
     }
 
 

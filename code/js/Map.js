@@ -47,9 +47,11 @@ class Map {
 
         var MapView = d3.select("#MapView")
 
+        MapView.append("div").attr("id", "break1");
+        MapView.append("div").attr("id", "slider");
         MapView.append("div").attr("id", "map");
         MapView.append("div").attr("id", "info");
-        MapView.append("div").attr("id", "break");
+        MapView.append("div").attr("id", "break2");
         MapView.append("div").attr("id", "charts");
 
         var MapSVG = d3.select("#map")
