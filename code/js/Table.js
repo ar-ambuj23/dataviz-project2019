@@ -31,63 +31,62 @@ class Table{
 
         console.log('table appear')
 
-        d3.select("#state").on("click",function(){that.sortState();});
-        d3.select("#co").on("click",function(){that.sortCo();});
-        d3.select("#so2").on("click",function(){that.sortSo2();});
-        d3.select("#no2").on("click",function(){that.sortNo2();});
-        d3.select("#ozone").on("click",function(){that.sortOzone();});
-
         that.updateTable()
 
     }
     sortState(){
-        console.log("Function called")
         let that = this;
         this.tableElements.sort(function(a,b){
-            if(that.stateFlag) return d3.ascending(a.State, b.State);
-            return d3.descending(a.State, b.State);
+            if(that.stateFlag) return d3.ascending(a.state, b.state);
+            return d3.descending(a.state, b.state);
         })
         that.stateFlag = !that.stateFlag;
+        that.clearTable();
         that.updateTable();
     }
     sortCo(){
         let that = this;
         this.tableElements.sort(function(a,b){
-            if(that.coFlag) return d3.ascending(a["CO Mean"], b["CO Mean"]);
-            return d3.descending(a["CO Mean"], b["CO Mean"]);
+            if(that.coFlag) return d3.ascending(a["CO"], b["CO"]);
+            return d3.descending(a["CO"], b["CO"]);
         })
         that.coFlag = !that.coFlag;
+        that.clearTable();
         that.updateTable();
     }
 
     sortNo2(){
         let that = this;
         this.tableElements.sort(function(a,b){
-            if(that.no2Flag) return d3.ascending(a["NO2 Mean"], b["NO2 Mean"]);
-            return d3.descending(a["NO2 Mean"], b["NO2 Mean"]);
+            if(that.no2Flag) return d3.ascending(a["NO2"], b["NO2"]);
+            return d3.descending(a["NO2"], b["NO2"]);
         })
         that.no2Flag = !that.no2Flag;
+        that.clearTable();
         that.updateTable();
     }
 
     sortSo2(){
         let that = this;
         this.tableElements.sort(function(a,b){
-            if(that.so2Flag) return d3.ascending(a["SO2 Mean"], b["SO2 Mean"]);
-            return d3.descending(a["SO2 Mean"], b["SO2 Mean"]);
+            if(that.so2Flag) return d3.ascending(a["SO2"], b["SO2"]);
+            return d3.descending(a["SO2"], b["SO2"]);
         })
         that.so2Flag = !that.so2Flag;
+        that.clearTable();
         that.updateTable();
     }
     sortOzone(){
         let that = this;
         this.tableElements.sort(function(a,b){
-            if(that.ozoneFlag) return d3.ascending(a["O3 Mean"], b["O3 Mean"]);
-            return d3.descending(a["O3 Mean"], b["O3 Mean"]);
+            if(that.ozoneFlag) return d3.ascending(a["O3"], b["O3"]);
+            return d3.descending(a["O3"], b["O3"]);
         })
         that.ozoneFlag = !that.ozoneFlag;
+        that.clearTable();
         that.updateTable();
     }
+
     updateTable() {
         let that = this;
 
@@ -108,6 +107,7 @@ class Table{
             .attr("width",this.cell.width)
             .attr("height",this.cell.height)
             .text(function(d){return d})
+            .attr("id",function(d){return d})
 
         //Making the other table rows
         let table = tableLayout.append('tbody')
@@ -302,10 +302,12 @@ class Table{
                 so2Text.text(d => d) // Display Text ##################
                         .attr("id","coText")
             
-        d3.select("#tableBody")
-            .selectAll("tr")
-            .selectAll("text")
-            .attr("text-align","center")
+
+        d3.select("#STATE").on("click",function(){that.sortState();});
+        d3.select("#CO").on("click",function(){that.sortCo();});
+        d3.select("#SO2").on("click",function(){that.sortSo2();});
+        d3.select("#NO2").on("click",function(){that.sortNo2();});
+        d3.select("#OZONE").on("click",function(){that.sortOzone();});
 
 
     }
