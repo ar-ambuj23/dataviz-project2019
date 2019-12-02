@@ -8,6 +8,7 @@ class LineCharts {
 
     drawPrimary(yearWiseStateData) {
 
+        this.drawText(yearWiseStateData);
         this.drawChart(yearWiseStateData, 'CO', 1000);
         this.drawChart(yearWiseStateData, 'SO2', 2000);
         this.drawChart(yearWiseStateData, 'NO2', 3000);
@@ -30,6 +31,7 @@ class LineCharts {
 
     clearCharts() {
 
+        this.clearText();
         this.clearChart('CO');
         this.clearChart('SO2');
         this.clearChart('NO2');
@@ -65,6 +67,7 @@ class LineCharts {
         // let propScale = d3.scaleLinear().domain([0, d3.max(data, (d) => {if(d) return d[prop]})]).range([190,0]); 
 
         let yScale = d3.scaleLinear().domain([0, d3.max(data, (d) => {if(d) return d[prop]})]).range([190, 0]);
+        let xScale = d3.scaleLinear().domain([0, 16]).range([0, screenWidth/4 - 70]);
 
         let lineGenerator = d3
             .line()
@@ -78,13 +81,6 @@ class LineCharts {
 
         axis.remove();
 
-       // const xAxisGroup = g.append('g').classed('axis', true);
-        const yAxisGroup = g.append('g').classed('axis', true);
-
-       // const xAxisScale = d3.axisBottom(iScale);
-        const yAxisScale = d3.axisLeft(yScale).tickSizeOuter(0);
-       // xAxisGroup.call(xAxisScale);
-        yAxisGroup.call(yAxisScale);
         
         let path = g.selectAll('path').data(data);
        
@@ -104,7 +100,18 @@ class LineCharts {
             .attr('opacity', 1)
             .attr('class', 'path ' +prop+'-path')
             .style("filter", "url(#glow)");
+
+        const yAxisGroup = g.append('g').classed('axis', true);
+
+        const yAxisScale = d3.axisLeft(yScale).tickSizeOuter(0);
+        const xAxisScale = d3.axisBottom(xScale).tickSizeOuter(0);
+
+        yAxisGroup.call(yAxisScale);
+        
+        const xAxisGroup = g.append('g').classed('axis', true).attr('id', 'x-axis');
     
+        xAxisGroup.attr("transform", "translate(0, 190)").call(xAxisScale);
+
     }
 
 
@@ -120,6 +127,21 @@ class LineCharts {
 
         axis.remove();
 
+    }
+
+    drawText(yearWiseStateData) {
+        this.clearText();
+        let state = yearWiseStateData[0];
+        if(state) state = state.state;
+        let chartSVG = d3.select('#chart-svg');
+        let g = chartSVG.select('#text-group');
+        g.append('text').text('Here\'s how '+state+' been doing over the years!').attr('class', 'attribute-value');
+    }
+
+    clearText() {
+        let chartSVG = d3.select('#chart-svg');
+        let g = chartSVG.select('#text-group');
+        g.selectAll('text').remove();
     }
 
 

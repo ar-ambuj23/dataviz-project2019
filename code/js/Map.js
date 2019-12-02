@@ -81,10 +81,11 @@ class Map {
         let translate1 = screen.availWidth/4+30;
         let translate2 = screen.availWidth/2+30;
         let translate3 = screen.availWidth*3/4+30;
-        chartSVG.append('g').attr('id', 'CO-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate(40, 0)');   
-        chartSVG.append('g').attr('id', 'SO2-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate('+translate1+', 0)');
-        chartSVG.append('g').attr('id', 'NO2-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate('+translate2+', 0)');
-        chartSVG.append('g').attr('id', 'O3-group').attr('width', screen.availWidth/4 -10).attr('transform', 'translate('+translate3+', 0)');
+        chartSVG.append('g').attr('id', 'text-group').attr('width', screen.availWidth).attr('transform', 'translate(20, 40)');   
+        chartSVG.append('g').attr('id', 'CO-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate(40, 60)');   
+        chartSVG.append('g').attr('id', 'SO2-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate('+translate1+', 60)');
+        chartSVG.append('g').attr('id', 'NO2-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate('+translate2+', 60)');
+        chartSVG.append('g').attr('id', 'O3-group').attr('width', screen.availWidth/4 -10).attr('transform', 'translate('+translate3+', 60)');
 
         //TODO: add projections to resize map
 
