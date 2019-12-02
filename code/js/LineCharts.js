@@ -67,7 +67,7 @@ class LineCharts {
         // let propScale = d3.scaleLinear().domain([0, d3.max(data, (d) => {if(d) return d[prop]})]).range([190,0]); 
 
         let yScale = d3.scaleLinear().domain([0, d3.max(data, (d) => {if(d) return d[prop]})]).range([190, 0]);
-        let xScale = d3.scaleLinear().domain([0, 16]).range([0, screenWidth/4 - 70]);
+        let xScale = d3.scaleLinear().domain([2000, 2016]).range([0, screenWidth/4 - 70]);
 
         let lineGenerator = d3
             .line()
@@ -104,7 +104,7 @@ class LineCharts {
         const yAxisGroup = g.append('g').classed('axis', true);
 
         const yAxisScale = d3.axisLeft(yScale).tickSizeOuter(0);
-        const xAxisScale = d3.axisBottom(xScale).tickSizeOuter(0);
+        const xAxisScale = d3.axisBottom(xScale).tickSizeOuter(0).tickFormat(d3.format("d"));
 
         yAxisGroup.call(yAxisScale);
         
