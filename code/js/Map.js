@@ -83,14 +83,15 @@ class Map {
         let translate1 = screen.availWidth/4+10;
         let translate2 = screen.availWidth/2+10;
         let translate3 = screen.availWidth*3/4+10;
+        let translate4 = translate1 - 100;
+
         chartSVG.append('g').attr('id', 'text-group').attr('width', screen.availWidth).attr('transform', 'translate(0, 40)'); 
-        chartSVG.append('g').attr('id', 'text-group2').attr('width', screen.availWidth).attr('transform', 'translate(620, 40)');   
-        chartSVG.append('g').attr('id', 'dropdown-group').attr('width', screen.availWidth).attr('transform', 'translate('+translate2+', -22)');  
-        chartSVG.append('g').attr('id', 'dropdown-group').attr('width', screen.availWidth).attr('transform', 'translate(0, 60)');  
-        chartSVG.append('g').attr('id', 'CO-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate(20, 60)');   
-        chartSVG.append('g').attr('id', 'SO2-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate('+translate1+', 60)');
-        chartSVG.append('g').attr('id', 'NO2-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate('+translate2+', 60)');
-        chartSVG.append('g').attr('id', 'O3-group').attr('width', screen.availWidth/4 -10).attr('transform', 'translate('+translate3+', 60)');
+        chartSVG.append('g').attr('id', 'text-group2').attr('width', screen.availWidth).attr('transform', 'translate(0, 80)');   
+        chartSVG.append('g').attr('id', 'dropdown-group').attr('width', screen.availWidth).attr('transform', 'translate('+translate4+', 20)');  
+        chartSVG.append('g').attr('id', 'CO-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate(20, 90)');   
+        chartSVG.append('g').attr('id', 'SO2-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate('+translate1+', 90)');
+        chartSVG.append('g').attr('id', 'NO2-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate('+translate2+', 90)');
+        chartSVG.append('g').attr('id', 'O3-group').attr('width', screen.availWidth/4 -10).attr('transform', 'translate('+translate3+', 90)');
 
         //TODO: add projections to resize map
 
@@ -281,6 +282,12 @@ class Map {
             this.clearCharts();
             return;
         }
+        let states = new Array();
+
+        for(var state of this.stateDataArray) {
+            if(state != null) states.push(state);
+        }
+        this.drawDropdown(states);
 
         let yearWiseStateData = new Array();
 
@@ -292,13 +299,8 @@ class Map {
 
         this.updatePrimaryChart(yearWiseStateData);
         
-        let states = new Array();
-
-        for(var state of this.stateDataArray) {
-            if(state != null) states.push(state);
-        }
+      
         
-        this.drawDropdown(states);
     }
 
     

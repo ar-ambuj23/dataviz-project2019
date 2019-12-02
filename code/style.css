@@ -303,6 +303,10 @@ toggle-button.active>.inner-circle{
     stroke: #1c9099;
 }
 
+.compare-path {
+    stroke: #EEEEEE;
+}
+
 .axis {
     color: #EEEEEE;
 }

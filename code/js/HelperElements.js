@@ -16,7 +16,7 @@ class HelperElements {
  * 3. State Dropdown.
  * 4. Info Box.
  */
-    constructor(pollutionData, updatePollutant, updateTime) {
+    constructor(pollutionData, updatePollutant, updateTime, updateComparableChart) {
         
         // // Making a list of options for drop down
         // this.pollutantList = ["Carbon Monoxide", "Sulphur Dioxide","Nitrous Oxide","Ozone"]
@@ -28,7 +28,9 @@ class HelperElements {
 
         this.updateTime = updateTime;
 
-        this.currentyear = 2004
+        this.currentyear = 2004;
+
+        this.updateComparableChart = updateComparableChart;
 
         // Calling Helper Methods
         this.drawTimeSlider();
@@ -181,8 +183,6 @@ class HelperElements {
             members.push(option);  
           }
 
-        console.log(members.length)
-
         let svg = d3.select("#dropdown-group")
                 
         // select.append("rect")
@@ -225,7 +225,7 @@ class HelperElements {
         
           svgDropDown(config);
         
-        
+          var that = this;
           /**  svg-dropdown.js - svg dropdown library  */
         
           function svgDropDown(options) {
@@ -425,9 +425,9 @@ class HelperElements {
               
               //this is the selected option
               //write code here to draw plots
-              console.log(selectedOption.value)
               var selectedState = selectedOption.value
-
+              that.updateComparableChart(selectedState.stateCode);
+              
 
             }
         
