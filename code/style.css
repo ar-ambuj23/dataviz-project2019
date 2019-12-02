@@ -414,3 +414,7 @@ a{
     height: 100%;  
     overflow-y:scroll; 
   }
+
+  .highlight {
+      fill: #01579b !important;
+  }

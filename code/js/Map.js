@@ -97,7 +97,6 @@ class Map {
 
         
         var path = d3.geoPath();
- 
         MapSVG.append("g")
             .attr("class", "states")
             .selectAll("path")
@@ -105,7 +104,9 @@ class Map {
             .enter().append("path")
             .attr("d", path)
             .attr("transform", 'scale(+'+this.scaleFactor+','+this.scaleFactor+')')
-            .on("click", d => this.highlightState(d, path));
+            .on("click", function(d) {
+                that.highlightState(d, path, this)
+            });
 
         this.updateMapForTime(this.activeTime);
 
@@ -174,10 +175,9 @@ class Map {
      * multiple states for comparison between 
      * them.
      */
-    highlightState(d, path) {
+    highlightState(d, path, element) {
 
         // this.selected();
-
         let mapSVG = d3.select('#map-svg');
         let g = mapSVG.select('g');
 
@@ -198,6 +198,13 @@ class Map {
                   break;
               }
           }
+          let mapSVG = d3.select('#map-svg');
+
+          let g = mapSVG.select('g');
+
+          var states = g.selectAll("path");
+          states.classed('highlight', false);
+          d3.select(element).classed('highlight', true);
           
           this.tableClear();
           this.drawWikiBox(state);
@@ -210,6 +217,12 @@ class Map {
           y = this.height / 1.1;
           k = 1;
           this.centered = null;
+          let mapSVG = d3.select('#map-svg');
+
+          let g = mapSVG.select('g');
+
+          var states = g.selectAll("path");
+          states.classed('highlight', false);
           this.clearHighlight();
         }
         g.selectAll("path")
