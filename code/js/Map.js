@@ -270,7 +270,10 @@ class Map {
 
     drawPrimaryChart(state) {
 
-        if(state == null) return;
+        if(state == null) {
+            this.clearCharts();
+            return;
+        }
 
         let yearWiseStateData = new Array();
 
