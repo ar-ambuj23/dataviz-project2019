@@ -1,12 +1,12 @@
 class Table{
     constructor(){
 
-        this.tableHeaders = ["State", "Carbon Monoxide", "Nitrous Oxide", "Ozone", "Sulphur Dioxide"];
+        this.tableHeaders = ["State", "Carbon Monoxide", "Nitrogen Dioxide", "Ozone", "Sulphur Dioxide"];
 
         this.tableElements = null;
 
         this.cell = {
-            "width": 100,
+            "width": 140,
             "height": 15,
             "buffer": 15
         };
@@ -317,7 +317,7 @@ class Table{
         d3.select("#State").on("click",function(){that.sortState();});
         d3.select("#Carbon\\ Monoxide").on("click",function(){that.sortCo();});
         d3.select("#Sulphur\\ Dioxide").on("click",function(){that.sortSo2();});
-        d3.select("#Nitrous\\ Oxide").on("click",function(){that.sortNo2();});
+        d3.select("#Nitrogen\\ Dioxide").on("click",function(){that.sortNo2();});
         d3.select("#Ozone").on("click",function(){that.sortOzone();});
 
 

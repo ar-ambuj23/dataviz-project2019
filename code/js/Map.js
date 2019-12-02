@@ -228,8 +228,8 @@ class Map {
        if(state) {
             stateArray[0] = {"name": "", "value":state.state, "class": "state-text"};
             stateArray[1] = {"name": "Carbon Monoxide:", "value": state.CO.toFixed(2), "class": "attribute-value"};
-            stateArray[2] = {"name" : "Sulfur Dioxide:", "value": state.SO2.toFixed(2), "class": "attribute-value" };
-            stateArray[3] = {"name" : "Nitrous Oxide:", "value": state.NO2.toFixed(2), "class": "attribute-value"};
+            stateArray[2] = {"name" : "Sulphur Dioxide:", "value": state.SO2.toFixed(2), "class": "attribute-value" };
+            stateArray[3] = {"name" : "Nitrogen Dioxide:", "value": state.NO2.toFixed(2), "class": "attribute-value"};
             stateArray[4] = {"name": "Ozone:", "value": state.O3.toFixed(2), "class": "attribute-value"};
             stateArray[5] = {"name": "", "value": "For more information, visit https://www.epa.gov/criteria-air-pollutants/naaqs-table", "class": "website"};
         
