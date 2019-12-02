@@ -326,7 +326,15 @@ toggle-button.active>.inner-circle{
     font-size: 14px;
     font-family: 'Raleway', sans-serif;
     color: #EEEEEE;
-    border-left: 1px solid #bdbdbd;
     overflow-y: scroll;
 }
 
+tbody {
+    display: block;
+    height: 400px;
+    overflow: auto;
+}
+thead{
+    display: inline-block;
+    color: lightskyblue;
+}
