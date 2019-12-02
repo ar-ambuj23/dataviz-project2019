@@ -313,3 +313,15 @@ toggle-button.active>.inner-circle{
     font-family: 'Raleway', sans-serif;
     color: #EEEEEE;
 }
+
+path:hover {
+	fill-opacity: .6;
+}
+
+.glow{
+    fill-opacity: 0.9;
+}
+
+.selected {
+    fill: red;
+  }

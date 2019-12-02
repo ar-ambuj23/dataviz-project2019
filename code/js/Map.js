@@ -169,6 +169,8 @@ class Map {
      */
     highlightState(d, path) {
 
+        this.selected();
+
         let mapSVG = d3.select('#map-svg');
         let g = mapSVG.select('g');
 
@@ -189,7 +191,7 @@ class Map {
                   break;
               }
           }
-          
+          console.log('d',d)
           this.tableClear();
           this.drawWikiBox(state);
           this.drawPrimaryChart(state);
@@ -423,4 +425,10 @@ class Map {
             return scaleFactor;
 
         }
+
+
+    selected() {
+    d3.select('.selected').classed('selected', false);
+    d3.select(this).classed('selected', true);
+    }
 }
