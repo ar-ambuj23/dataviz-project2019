@@ -338,3 +338,15 @@ thead{
     display: inline-block;
     color: lightskyblue;
 }
+
+path:hover {
+	fill-opacity: .6;
+}
+
+.glow{
+    fill-opacity: 0.9;
+}
+
+.selected {
+    fill: red;
+  }
