@@ -6,7 +6,7 @@ class Table{
         this.tableElements = null;
 
         this.cell = {
-            "width": 140,
+            "width": 100,
             "height": 15,
             "buffer": 15
         };
