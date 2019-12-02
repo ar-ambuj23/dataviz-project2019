@@ -97,12 +97,12 @@ select {
 }
 
 #dropdown-group {
-    height: 30px;
+    height: 1000px;
     display: block;
     font-size: 35px;
     fill: #EEEEEE;
     font-family: 'Raleway', sans-serif;
-
+    overflow-y:scroll;
 }
 
 #pollutantSelector {
@@ -393,3 +393,20 @@ a{
 .alignAdjust{
         margin-left: 3%;
 }
+
+.root {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    font-family: "Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif";
+    overflow-y:scroll;
+  }
+
+  .input-container {
+    float: left;
+    width: 50%;
+    height: 100%;  
+    overflow-y:scroll; 
+  }
