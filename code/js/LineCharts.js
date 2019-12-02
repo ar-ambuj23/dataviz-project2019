@@ -32,6 +32,7 @@ class LineCharts {
     clearCharts() {
 
         this.clearText();
+        this.clearDropdown();
         this.clearChart('CO');
         this.clearChart('SO2');
         this.clearChart('NO2');
@@ -136,14 +137,24 @@ class LineCharts {
         let chartSVG = d3.select('#chart-svg');
         let g = chartSVG.select('#text-group');
         g.append('text').text('Here\'s how '+state+' been doing over the years!').attr('class', 'attribute-value');
+        let g2 = chartSVG.select('#text-group2');
+        g2.append('text').text('Compare with another state:').attr('class', 'attribute-value');
     }
 
     clearText() {
         let chartSVG = d3.select('#chart-svg');
         let g = chartSVG.select('#text-group');
         g.selectAll('text').remove();
+        g = chartSVG.select('#text-group2');
+        g.selectAll('text').remove();
     }
 
+
+    clearDropdown() {
+        let chartSVG = d3.select('#chart-svg');
+        let g = chartSVG.select('#dropdown-group');
+        g.selectAll('g').remove();
+    }
 
     drawLine(data, prop, duration) {
 
@@ -195,8 +206,8 @@ class LineCharts {
             .duration(duration)
             .attr('opacity', 1)
             .attr('id', 'compare')
-            .attr('class', 'path ' +prop+'-path')
-            .style("filter", "url(#glow)");
+            .attr('class', 'path compare-path');
+//            .style("filter", "url(#glow)");
 
     }
 

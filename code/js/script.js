@@ -20,7 +20,7 @@ d3.json('https://d3js.org/us-10m.v1.json').then( usMapData => {
             mapObj.createMap();
 
             //Creating all the Helper Elements
-            helperObj = new HelperElements(pollutionData, updatePollutant, updateTime);
+            helperObj = new HelperElements(pollutionData, updatePollutant, updateTime, updateComparableChart);
 
             
 
@@ -38,8 +38,15 @@ d3.json('https://d3js.org/us-10m.v1.json').then( usMapData => {
         chartObj.drawPrimary(yearWiseStateData);
     }
        
-    function updateComparableChart(stateData) {
-        chartObj.drawComparable(stateData);
+    function updateComparableChart(stateCode) {
+        let yearWiseStateData = new Array();
+
+        for(var year = 2000; year <= 2016; year++) {
+          let stateDataArray = mapObj.getYearWiseStateData(year, stateCode);
+          yearWiseStateData.push(stateDataArray);
+
+        }
+        chartObj.drawComparable(yearWiseStateData);
     }
 
     function clearCharts() {
@@ -57,6 +64,7 @@ d3.json('https://d3js.org/us-10m.v1.json').then( usMapData => {
     function drawDropdown(states) {
         helperObj.drawDropdown(states);
     }
+
 });
 
     
