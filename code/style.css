@@ -17,8 +17,8 @@ body {
     fill: white;
 }
 
-.states :hover {
-    fill: darkgrey;
+.state-borders:hover {
+    fill-opacity: 0.5;
 }
 
 .state-borders {
@@ -88,6 +88,21 @@ body {
 
 .states-active {
     fill: orange!important;
+}
+
+select {
+    display: block;
+    height: 30px;
+    width: 60px;
+}
+
+#dropdown-group {
+    height: 30px;
+    display: block;
+    font-size: 35px;
+    fill: #EEEEEE;
+    font-family: 'Raleway', sans-serif;
+
 }
 
 #pollutantSelector {

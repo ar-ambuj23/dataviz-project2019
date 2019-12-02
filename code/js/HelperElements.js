@@ -6,7 +6,7 @@ class HelperElements {
  * List of helper elements:
  * 1. Time Slider.
  * 2. Time Period Toggle.
- * 3. Pollutant Dropdown.
+ * 3. State Dropdown.
  * 4. Info Box.
  */
     constructor(pollutionData, updatePollutant, updateTime) {
@@ -80,7 +80,6 @@ class HelperElements {
 
     stop(){
         this.stopValue = true;
-        // console.log('stop fn')
     }
 
 
@@ -159,30 +158,26 @@ class HelperElements {
         svgBtn.append("span").text("   YEAR")
     }
 
-    // /*
-    //  * draws the dropdown for 
-    //  * pollutants and throws related events.
-    //  */
-    // drawDropdown(pollutantList) {
+    /*
+     * draws the dropdown for 
+     * pollutants and throws related events.
+     */
+    drawDropdown(states) {
 
-    //     let that = this;
+        let option_select = d3.select("#dropdown-group")
+                .append("div")
+                .append("select");
 
-    //     let option_select = d3.select("#buttons")
-    //             .append("div")
-    //             .append("select")
-    //             .attr("id", "pollutantSelector")
+        for (var i = 0; i < states.length; i++) {
+            var opt = option_select.append("option")
+            .attr("value", states[i].state)
+            .text(states[i].state);
+        }
 
-    //     for (var i = 0; i < this.pollutantList.length; i++) {
-    //         var opt = option_select.append("option")
-    //         .attr("value", this.pollutantList[i])
-    //         .text(this.pollutantList[i]);
-    //     }
-
-    //     option_select.on('change', function(d, i) {
-    //         let selectedPollutant = this.options[this.selectedIndex].value;
-    //         that.updatePollutant(selectedPollutant);
-    //     });
-    // }
+        option_select.on('change', function(d, i) {
+           console.log(d);
+        });
+    }
 
     // /**
     //  * draws the info-box when a 

@@ -13,7 +13,7 @@ class StateData {
 
 class Map {
 
-    constructor(usData, pollutionData, updatePrimaryChart, updateComparableChart, clearCharts, updateTable, tableClear) {
+    constructor(usData, pollutionData, updatePrimaryChart, updateComparableChart, clearCharts, updateTable, tableClear, drawDropdown) {
         this.usData = usData;
         this.pollutionData = pollutionData;
         this.centered = null;
@@ -32,6 +32,8 @@ class Map {
 
         this.updateTable = updateTable;
         this.tableClear = tableClear;
+
+        this.drawDropdown = drawDropdown;
     }
 
     /**
@@ -78,11 +80,12 @@ class Map {
                         .attr("width", screen.availWidth-50)
                         .attr("height", 300);
         
-        let translate1 = screen.availWidth/4+30;
-        let translate2 = screen.availWidth/2+30;
-        let translate3 = screen.availWidth*3/4+30;
-        chartSVG.append('g').attr('id', 'text-group').attr('width', screen.availWidth).attr('transform', 'translate(20, 40)');   
-        chartSVG.append('g').attr('id', 'CO-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate(40, 60)');   
+        let translate1 = screen.availWidth/4+10;
+        let translate2 = screen.availWidth/2+10;
+        let translate3 = screen.availWidth*3/4+10;
+        chartSVG.append('g').attr('id', 'text-group').attr('width', screen.availWidth).attr('transform', 'translate(0, 40)');   
+        chartSVG.append('g').attr('id', 'dropdown-group').attr('width', screen.availWidth).attr('transform', 'translate(0, 60)');  
+        chartSVG.append('g').attr('id', 'CO-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate(20, 60)');   
         chartSVG.append('g').attr('id', 'SO2-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate('+translate1+', 60)');
         chartSVG.append('g').attr('id', 'NO2-group').attr('width', screen.availWidth/4 - 10).attr('transform', 'translate('+translate2+', 60)');
         chartSVG.append('g').attr('id', 'O3-group').attr('width', screen.availWidth/4 -10).attr('transform', 'translate('+translate3+', 60)');
@@ -284,7 +287,14 @@ class Map {
         }
 
         this.updatePrimaryChart(yearWiseStateData);
+        
+        let states = new Array();
 
+        for(var state of this.stateDataArray) {
+            if(state != null) states.push(state);
+        }
+        
+        this.drawDropdown(states);
     }
 
     
