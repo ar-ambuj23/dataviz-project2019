@@ -262,7 +262,7 @@ toggle-button.active>.inner-circle{
 }
 
 .view {
-    top: 200px;
+    top: 250px;
     position: absolute;
 }
 
@@ -350,3 +350,46 @@ path:hover {
 .selected {
     fill: red;
   }
+p{
+    display: inline-block;
+    color: #e0f2f1;
+    font-family: 'Raleway', sans-serif;
+}
+a{
+    text-decoration: none;
+    color: #e0f2f1;
+    font-family: 'Raleway', sans-serif;
+}
+#about-content{
+    position: relative;
+    text-align: justify;
+    text-justify: inter-word;
+    width: 500px;
+    top: 50px;
+    left: 35%;
+
+}
+.crew{
+    margin-left: 45%;
+    color: #e0f2f1;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+}
+.amb{
+    display: inline-block;
+    width:100px;
+    margin-left: 25%;
+}
+.sha{
+    display: inline-block;
+    width:100px;
+    margin-left: 150px;
+}
+.sush{
+    display: inline-block;
+    width:100px;
+    margin-right: 25%;
+}
+.alignAdjust{
+        margin-left: 3%;
+}
