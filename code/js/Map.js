@@ -297,8 +297,8 @@ class Map {
         }
         let states = new Array();
 
-        for(var state of this.stateDataArray) {
-            if(state != null) states.push(state);
+        for(var stateData of this.stateDataArray) {
+            if(stateData != null) states.push(stateData);
         }
         this.drawDropdown(states);
 
