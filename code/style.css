@@ -304,8 +304,10 @@ toggle-button.active>.inner-circle{
     font-size: 14px;
     font-family: 'Raleway', sans-serif;
     color: #EEEEEE;
-    border-left: 1px solid #bdbdbd;
+    /*border-left: 1px solid #bdbdbd;*/
     overflow-y: scroll;
+    border: lightskyblue;
+
 }
 
 #tableBody {
@@ -313,3 +315,15 @@ toggle-button.active>.inner-circle{
     font-family: 'Raleway', sans-serif;
     color: #EEEEEE;
 }
+tbody {
+    display: block;
+    height: 400px;
+    overflow: auto;
+}
+thead{
+    display: inline-block;
+    color: lightskyblue;
+}
+/*!*td, th {*!*/
+/*    border: 1px solid orange;*/
+/*}*/
